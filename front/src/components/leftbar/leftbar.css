@@ -48,12 +48,15 @@
     width: 150px;
     border: none;
     padding : 10px;
-    border-radius: 5px;
-    font-weight: 500;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 500;
+    transition: 0.5s;
 }
 
 .leftbarButton:hover {
     background-color: #ffd7d7;
+    color:#4e5166;
 }
 
 .leftbarHr {
