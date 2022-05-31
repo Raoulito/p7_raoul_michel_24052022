@@ -69,7 +69,7 @@ exports.getPostsById = async (req, res) => {
 }
 
 //get a post
-export.getPost = async (req, res) => {
+exports.getPost = async (req, res) => {
     try {
         const post = await Post.findById(req.params.id);
         res.status(200).json({ post });
