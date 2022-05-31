@@ -3,6 +3,10 @@ import PermMediaIcon from '@mui/icons-material/PermMedia';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
+import PhotoProfil from "../../assets/person/1.jpeg";
+import Avatar from "@mui/material/Avatar";
+
+
 
 export default function Share() {
   return (
@@ -11,7 +15,7 @@ export default function Share() {
       SHARE
             <div className="shareWrapper">
                 <div className="shareTop">
-                    <img className="shareProfilePicture" src="/assets/person/1.jpeg" alt="" />
+                <Avatar alt="Raoul MICHEL" src={PhotoProfil} />
                     <input placeholder="Quoi de neuf Raoul ?" className="shareInput" />
                 </div>
                 <hr className="shareHr" />

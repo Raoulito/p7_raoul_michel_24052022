@@ -21,8 +21,10 @@ import Logo from "../../assets/logos/icon-left-font-monochrome-black.png";
 import SchoolIcon from '@mui/icons-material/School';
 import BeachAccessIcon from '@mui/icons-material/BeachAccess';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
+import Avatar from "@mui/material/Avatar";
 
-const drawerWidth = 240;
+
+const drawerWidth = 260;
 
 function Leftbar(props) {
     const { window } = props;
@@ -32,7 +34,7 @@ function Leftbar(props) {
         setMobileOpen(!mobileOpen);
     };
 
-const menuLeft = [
+const menuLeftUp = [
     {
         name:"Fil d'actualités",
         icon:(<DynamicFeedIcon/>)
@@ -63,16 +65,31 @@ const menuLeft = [
 }
 ]
 
+const menuLeftDown = [
+    {
+        name:"Bob",
+        photoProfil:"../assets/person/2.jpeg"
+    },
+    {
+        name:"Alice",
+        photoProfil:"../assets/person/3.jpeg"
+    },
+    {
+        name:"Carl",
+        photoProfil:"../assets/person/4.jpeg"
+    }
+]
+
     const drawer = (
-        <div>
-            <Toolbar>
+        <div >
+            <Toolbar >
             <Box display="flex">
                 <img src={Logo} width="200px" />
             </Box>
             </Toolbar>
             <Divider />
             <List>
-                {menuLeft.map((entry, index) => (
+                {menuLeftUp.map((entry, index) => (
                     <ListItem key={index} disablePadding>
                         <ListItemButton>
                             <ListItemIcon>{entry.icon}</ListItemIcon>
@@ -83,11 +100,11 @@ const menuLeft = [
             </List>
             <Divider />
             <List>
-                {["All mail", "Trash", "Spam"].map((text, index) => (
-                    <ListItem key={text} disablePadding>
+                {menuLeftDown.map((entry, index) => (
+                    <ListItem key={index} disablePadding>
                         <ListItemButton>
-                            <ListItemIcon>{index % 2 === 0 ? <MessageIcon /> : <MessageIcon />}</ListItemIcon>
-                            <ListItemText primary={text} />
+                            <Avatar alt={entry.name} src={entry.photoProfil}/>
+                            <ListItemText primary={entry.name} />
                         </ListItemButton>
                     </ListItem>
                 ))}

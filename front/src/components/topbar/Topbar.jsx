@@ -20,7 +20,6 @@ import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import styled from "@emotion/styled";
 
-const pages = ["Fil d'actualités"];
 const settings = ["Profil", "Mon compte", "Déconnexion"];
 
 const Topbar = () => {
@@ -96,23 +95,11 @@ const Topbar = () => {
                                 display: { xs: "block", md: "none" },
                             }}
                         >
-                            {pages.map((page) => (
-                                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                    <Typography textAlign="center">{page}</Typography>
-                                </MenuItem>
-                            ))}
                         </Menu>
                     </Box>
 
                     <Box sx={{ flexGrow: 1 }} />
-
-                    <Box sx={{ flexGrow: 0, display: { xs: "none", md: "flex" } }}>
-                        {pages.map((page) => (
-                            <Button key={page} onClick={handleCloseNavMenu} sx={{ my: 2, color: "#4e5166", display: "block" }}>
-                                {page}
-                            </Button>
-                        ))}
-                    </Box>
+                    
                     <MenuItem>
                         <IconButton size="large" aria-label="Vous avez 4 messages" color="inherit">
                             <Badge badgeContent={4} color="error">
