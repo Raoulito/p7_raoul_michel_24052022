@@ -1,87 +1,148 @@
-import "./leftbar.css";
-import DynamicFeedIcon from "@mui/icons-material/DynamicFeed";
-import MessageIcon from "@mui/icons-material/Message";
-import OndemandVideoIcon from "@mui/icons-material/OndemandVideo";
-import GroupIcon from "@mui/icons-material/Group";
-import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
-import SchoolIcon from "@mui/icons-material/School";
-import BeachAccessIcon from "@mui/icons-material/BeachAccess";
+import * as React from "react";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import CssBaseline from "@mui/material/CssBaseline";
+import Divider from "@mui/material/Divider";
+import Drawer from "@mui/material/Drawer";
+import IconButton from "@mui/material/IconButton";
+import DynamicFeedIcon from '@mui/icons-material/DynamicFeed';
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import MessageIcon from '@mui/icons-material/Message';
+import MenuIcon from "@mui/icons-material/Menu";
+import Toolbar from "@mui/material/Toolbar";
+import Topbar from "../topbar/Topbar";
+import OndemandVideoIcon from '@mui/icons-material/OndemandVideo';
+import GroupsIcon from '@mui/icons-material/Groups';
+import Logo from "../../assets/logos/icon-left-font-monochrome-black.png";
+import SchoolIcon from '@mui/icons-material/School';
+import BeachAccessIcon from '@mui/icons-material/BeachAccess';
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 
-export default function Leftbar() {
-    return (
-        <div className="leftbar">
-            <div className="leftbarWrapper">
-                <ul className="leftbarList">
-                    <li className="leftbarListItem">
-                        <DynamicFeedIcon className="leftbarIcon" />
-                        <span className="leftbarListItemText">Fil d'actualités</span>
-                    </li>
-                    <li className="leftbarListItem">
-                        <MessageIcon className="leftbarIcon" />
-                        <span className="leftbarListItemText">Messagerie</span>
-                    </li>
-                    <li className="leftbarListItem">
-                        <OndemandVideoIcon className="leftbarIcon" />
-                        <span className="leftbarListItemText">Vidéos</span>
-                    </li>
-                    <li className="leftbarListItem">
-                        <GroupIcon className="leftbarIcon" />
-                        <span className="leftbarListItemText">Vos groupes</span>
-                    </li>
-                    <li className="leftbarListItem">
-                        <SchoolIcon className="leftbarIcon" />
-                        <span className="leftbarListItemText">Formations</span>
-                    </li>
-                    <li className="leftbarListItem">
-                        <BeachAccessIcon className="leftbarIcon" />
-                        <span className="leftbarListItemText">Comité d'Entreprise</span>
-                    </li>
-                    <li className="leftbarListItem">
-                        <HelpOutlineIcon className="leftbarIcon" />
-                        <span className="leftbarListItemText">Foire aux Questions</span>
-                    </li>
-                </ul>
-                <button className="leftbarButton">En voir plus...</button>
-                <hr className="leftbarHr" />
-                <ul className="leftbarFriendList">
-                    <li className="leftbarFriend">
-                        <img src="/assets/person/2.jpeg" alt="" className="leftbarFriendImg" />
-                        <span className="leftbarFriendName">Big Boss - CEO</span>
-                    </li>
-                    <li className="leftbarFriend">
-                        <img src="/assets/person/5.jpeg" alt="" className="leftbarFriendImg" />
-                        <span className="leftbarFriendName">Gertrude - Comptable</span>
-                    </li>
-                    <li className="leftbarFriend">
-                        <img src="/assets/person/4.jpeg" alt="" className="leftbarFriendImg" />
-                        <span className="leftbarFriendName">Stagiaire - Photocopies</span>
-                    </li>
-                    <li className="leftbarFriend">
-                        <img src="/assets/person/6.jpeg" alt="" className="leftbarFriendImg" />
-                        <span className="leftbarFriendName">Stagiaire - Photocopies</span>
-                    </li>
-                    <li className="leftbarFriend">
-                        <img src="/assets/person/3.jpeg" alt="" className="leftbarFriendImg" />
-                        <span className="leftbarFriendName">Stagiaire - Photocopies</span>
-                    </li>
-                    <li className="leftbarFriend">
-                        <img src="/assets/person/7.jpeg" alt="" className="leftbarFriendImg" />
-                        <span className="leftbarFriendName">Stagiaire - Photocopies</span>
-                    </li>
-                    <li className="leftbarFriend">
-                        <img src="/assets/person/8.jpeg" alt="" className="leftbarFriendImg" />
-                        <span className="leftbarFriendName">Stagiaire - Photocopies</span>
-                    </li>
-                    <li className="leftbarFriend">
-                        <img src="/assets/person/9.jpeg" alt="" className="leftbarFriendImg" />
-                        <span className="leftbarFriendName">Stagiaire - Photocopies</span>
-                    </li>
-                    <li className="leftbarFriend">
-                        <img src="/assets/person/10.jpeg" alt="" className="leftbarFriendImg" />
-                        <span className="leftbarFriendName">Stagiaire - Photocopies</span>
-                    </li>
-                </ul>
-            </div>
+const drawerWidth = 240;
+
+function Leftbar(props) {
+    const { window } = props;
+    const [mobileOpen, setMobileOpen] = React.useState(false);
+
+    const handleDrawerToggle = () => {
+        setMobileOpen(!mobileOpen);
+    };
+
+const menuLeft = [
+    {
+        name:"Fil d'actualités",
+        icon:(<DynamicFeedIcon/>)
+    },
+    {
+        name:"Messagerie", 
+        icon:(<MessageIcon/>)
+    },
+{
+    name:"Vidéos",
+    icon:(<OndemandVideoIcon/>)
+},
+{
+    name:"Vos groupes",
+    icon:(<GroupsIcon/>)
+},
+{
+    name:"Formations",
+    icon:(<SchoolIcon/>)
+},
+{
+    name:"Comité d'entreprise",
+    icon:(<BeachAccessIcon/>)
+},
+{
+    name:"Foire aux questions",
+    icon:(<HelpOutlineIcon/>)
+}
+]
+
+    const drawer = (
+        <div>
+            <Toolbar>
+            <Box display="flex">
+                <img src={Logo} width="200px" />
+            </Box>
+            </Toolbar>
+            <Divider />
+            <List>
+                {menuLeft.map((entry, index) => (
+                    <ListItem key={index} disablePadding>
+                        <ListItemButton>
+                            <ListItemIcon>{entry.icon}</ListItemIcon>
+                            <ListItemText primary={entry.name} />
+                        </ListItemButton>
+                    </ListItem>
+                ))}
+            </List>
+            <Divider />
+            <List>
+                {["All mail", "Trash", "Spam"].map((text, index) => (
+                    <ListItem key={text} disablePadding>
+                        <ListItemButton>
+                            <ListItemIcon>{index % 2 === 0 ? <MessageIcon /> : <MessageIcon />}</ListItemIcon>
+                            <ListItemText primary={text} />
+                        </ListItemButton>
+                    </ListItem>
+                ))}
+            </List>
         </div>
     );
+
+    const container = window !== undefined ? () => window().document.body : undefined;
+
+    return (
+        <Box sx={{ display: "flex" }}>
+            <CssBaseline />
+            <AppBar
+                position="fixed"
+                sx={{
+                    width: { sm: `calc(100% - ${drawerWidth}px)` },
+                    ml: { sm: `${drawerWidth}px` },
+                }}
+            >
+                <IconButton color="inherit" aria-label="open drawer" edge="start" onClick={handleDrawerToggle} sx={{ mr: 2, display: { sm: "none" } }}>
+                    <MenuIcon />
+                </IconButton>
+
+                <Topbar />
+            </AppBar>
+            <Box component="nav" sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }} aria-label="mailbox folders">
+                {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+                <Drawer
+                    container={container}
+                    variant="temporary"
+                    open={mobileOpen}
+                    onClose={handleDrawerToggle}
+                    ModalProps={{
+                        keepMounted: true, // Better open performance on mobile.
+                    }}
+                    sx={{
+                        display: { xs: "block", sm: "none" },
+                        "& .MuiDrawer-paper": { boxSizing: "border-box", width: drawerWidth },
+                    }}
+                >
+                    {drawer}
+                </Drawer>
+                <Drawer
+                    variant="permanent"
+                    sx={{
+                        display: { xs: "none", sm: "block" },
+                        "& .MuiDrawer-paper": { boxSizing: "border-box", width: drawerWidth },
+                    }}
+                    open
+                >
+                    {drawer}
+                </Drawer>
+            </Box>
+        </Box>
+    );
 }
+
+export default Leftbar;

@@ -1,5 +1,5 @@
 .leftbar {
-    flex:3;
+    flex:25%;
     height : calc(100vh - 50px);
     background-color: #4e5166;
     color: white;

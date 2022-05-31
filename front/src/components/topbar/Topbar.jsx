@@ -1,45 +1,166 @@
-import "./topbar.css";
-import SearchIcon from '@mui/icons-material/Search';
-import PersonIcon from '@mui/icons-material/Person';
-import ChatIcon from '@mui/icons-material/Chat';
-import NotificationsIcon from '@mui/icons-material/Notifications';
+import * as React from "react";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import Menu from "@mui/material/Menu";
+import MenuIcon from "@mui/icons-material/Menu";
+import Container from "@mui/material/Container";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import Tooltip from "@mui/material/Tooltip";
+import MenuItem from "@mui/material/MenuItem";
+import PhotoProfil from "../../assets/person/1.jpeg";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import MessageIcon from '@mui/icons-material/Message';
+import Badge from "@mui/material/Badge";
+import SearchIcon from "@mui/icons-material/Search";
+import TextField from "@mui/material/TextField";
+import InputAdornment from "@mui/material/InputAdornment";
+import styled from "@emotion/styled";
 
-export default function Topbar() {
+const pages = ["Fil d'actualités"];
+const settings = ["Profil", "Mon compte", "Déconnexion"];
+
+const Topbar = () => {
+    const [anchorElNav, setAnchorElNav] = React.useState(null);
+    const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+    const handleOpenNavMenu = (event) => {
+        setAnchorElNav(event.currentTarget);
+    };
+    const handleOpenUserMenu = (event) => {
+        setAnchorElUser(event.currentTarget);
+    };
+
+    const handleCloseNavMenu = () => {
+        setAnchorElNav(null);
+    };
+
+    const handleCloseUserMenu = () => {
+        setAnchorElUser(null);
+    };
+
+    const StyledTextField = styled(TextField)({
+        backgroundColor: "#fff",
+        borderRadius: "15px",
+        width: "35%",
+        "& .MuiOutlinedInput-notchedOutline": {
+            border: "none",
+        },
+        "&.Mui-focused": {
+            "& .MuiOutlinedInput-notchedOutline": {
+                border: "none",
+            },
+        },
+    });
+
     return (
-    <div className="topbarContainer">
-        <div className="topbarLeft">
-            <img src="/assets/logos/icon-left-font-monochrome-black.png" alt="Logo Groupomania" className="logo"/>
-        </div>
-        <div className="topbarCenter">
-            <div className="searchbar">
-                <SearchIcon className="searchIcon"/>
-                <input placeholder="Que recherchez-vous ?" className="searchInput" />
-            </div>
-        </div>
-        <div className="topbarRight">
-            <div className="topbarLinks">
-            <span className="topbarLink">Accueil</span>
-            <span className="topbarLink">Fil d'actualités</span>
-            </div>
-            <div className="topbarIcons">
-                <div className="topbarIconItem">
-                <PersonIcon/>
-                <span className="topbarIconBadge">1</span>
+        <AppBar position="sticky">
+            <Container maxWidth="xl">
+                <Toolbar disableGutters sx={{ backgroundColor: "primary" }}>
+                    <Box flexGrow={1} />
+                    <StyledTextField
+                        sx={{ display: "flex" }}
+                        placeholder="Que recherchez-vous ?"
+                        InputProps={{
+                            "aria-label": "search",
+                            startAdornment: (
+                                <InputAdornment>
+                                    <SearchIcon />
+                                </InputAdornment>
+                            ),
+                        }}
+                    />
 
-                </div>
-                <div className="topbarIconItem">
-                <ChatIcon/>
-                <span className="topbarIconBadge">2</span>
+                    <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+                        <IconButton size="large" aria-label="account of current user" aria-controls="menu-appbar" aria-haspopup="true" onClick={handleOpenNavMenu} color="secondary">
+                            <MenuIcon />
+                        </IconButton>
+                        <Menu
+                            id="menu-appbar"
+                            anchorEl={anchorElNav}
+                            anchorOrigin={{
+                                vertical: "bottom",
+                                horizontal: "right",
+                            }}
+                            keepMounted
+                            transformOrigin={{
+                                vertical: "top",
+                                horizontal: "left",
+                            }}
+                            open={Boolean(anchorElNav)}
+                            onClose={handleCloseNavMenu}
+                            sx={{
+                                display: { xs: "block", md: "none" },
+                            }}
+                        >
+                            {pages.map((page) => (
+                                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                                    <Typography textAlign="center">{page}</Typography>
+                                </MenuItem>
+                            ))}
+                        </Menu>
+                    </Box>
 
-                </div>
-                <div className="topbarIconItem">
-                <NotificationsIcon/>
-                <span className="topbarIconBadge">3</span>
+                    <Box sx={{ flexGrow: 1 }} />
 
-                </div>
-            </div>
-            <img src="/assets/person/1.jpeg" alt="Photo de profil" className="topbarImg" />
-        </div>
-        </div>
-    )
-}
+                    <Box sx={{ flexGrow: 0, display: { xs: "none", md: "flex" } }}>
+                        {pages.map((page) => (
+                            <Button key={page} onClick={handleCloseNavMenu} sx={{ my: 2, color: "#4e5166", display: "block" }}>
+                                {page}
+                            </Button>
+                        ))}
+                    </Box>
+                    <MenuItem>
+                        <IconButton size="large" aria-label="Vous avez 4 messages" color="inherit">
+                            <Badge badgeContent={4} color="error">
+                                <MessageIcon />
+                            </Badge>
+                        </IconButton>
+                    </MenuItem>
+                    <MenuItem>
+                        <IconButton size="large" aria-label="Vous avez 17 notifications" color="inherit" sx={{ pr: 2 }}>
+                            <Badge badgeContent={17} color="error">
+                                <NotificationsIcon />
+                            </Badge>
+                        </IconButton>
+                    </MenuItem>
+
+                    <Box sx={{ flexGrow: 0 }}>
+                        <Tooltip title="Voir le menu">
+                            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                                <Avatar alt="Raoul MICHEL" src={PhotoProfil} />
+                            </IconButton>
+                        </Tooltip>
+                        <Menu
+                            sx={{ mt: "45px" }}
+                            id="menu-appbar"
+                            anchorEl={anchorElUser}
+                            anchorOrigin={{
+                                vertical: "top",
+                                horizontal: "right",
+                            }}
+                            keepMounted
+                            transformOrigin={{
+                                vertical: "top",
+                                horizontal: "right",
+                            }}
+                            open={Boolean(anchorElUser)}
+                            onClose={handleCloseUserMenu}
+                        >
+                            {settings.map((setting) => (
+                                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                                    <Typography textAlign="center">{setting}</Typography>
+                                </MenuItem>
+                            ))}
+                        </Menu>
+                    </Box>
+                </Toolbar>
+            </Container>
+        </AppBar>
+    );
+};
+
+export default Topbar;
