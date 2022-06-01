@@ -19,6 +19,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import styled from "@emotion/styled";
+import { Paper } from "@mui/material";
 
 const settings = ["Profil", "Mon compte", "Déconnexion"];
 
@@ -56,7 +57,6 @@ const Topbar = () => {
     });
 
     return (
-        <AppBar position="sticky">
             <Container maxWidth="xl">
                 <Toolbar disableGutters sx={{ backgroundColor: "primary" }}>
                     <Box flexGrow={1} />
@@ -146,7 +146,6 @@ const Topbar = () => {
                     </Box>
                 </Toolbar>
             </Container>
-        </AppBar>
     );
 };
 
