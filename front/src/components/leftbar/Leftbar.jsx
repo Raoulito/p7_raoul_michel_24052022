@@ -24,6 +24,10 @@ import DynamicFeedIcon from "@mui/icons-material/DynamicFeed";
 import MessageIcon from "@mui/icons-material/Message";
 import OndemandVideoIcon from "@mui/icons-material/OndemandVideo";
 import GroupsIcon from "@mui/icons-material/Groups";
+import { Routes, Route } from "react-router-dom";
+import Home from "../../pages/home/Home";
+import { GroupoManiaRoutes } from "../../router/routes";
+
 
 const drawerWidth = 240;
 
@@ -117,10 +121,10 @@ function Leftbar(props) {
       <CssBaseline />
       <AppBar
         position="fixed"
-        sx={{
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
-          ml: { sm: `${drawerWidth}px` },
-        }}
+        // sx={{
+        //   width: { sm: `calc(100% - ${drawerWidth}px)` },
+        //   ml: { sm: `${drawerWidth}px` },
+        // }}
       >
         <Toolbar>
           <IconButton
@@ -143,7 +147,7 @@ function Leftbar(props) {
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Drawer
           container={container}
-          variant="temporary"
+          variant="persistent"
           open={mobileOpen}
           onClose={handleDrawerToggle}
           ModalProps={{
@@ -172,6 +176,17 @@ function Leftbar(props) {
         >
           {drawer}
         </Drawer>
+      </Box>
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          p: 3,
+          width: { sm: `calc(100% - ${drawerWidth}px)` },
+        }}
+      >
+        <Toolbar />
+        <GroupoManiaRoutes />
       </Box>
     </Box>
   );
