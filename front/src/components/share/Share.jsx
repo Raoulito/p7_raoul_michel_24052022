@@ -1,47 +1,48 @@
-import "./share.css";
-import PermMediaIcon from '@mui/icons-material/PermMedia';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import LocalOfferIcon from '@mui/icons-material/LocalOffer';
-import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
-import PhotoProfil from "../../assets/person/1.jpeg";
-import Avatar from "@mui/material/Avatar";
+import * as React from 'react';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import styled from "@emotion/styled";
+import TextField from "@mui/material/TextField";
 
+const StyledTextField = styled(TextField)({
+    backgroundColor: "#fff",
+    fontWeight: "bold",
+    borderRadius: "15px",
+    width: "90%",
+    "& .MuiOutlinedInput-notchedOutline": {
+        border: "none",
+    },
+    "&.Mui-focused": {
+        "& .MuiOutlinedInput-notchedOutline": {
+            border: "none",
+        },
+    },
+});
 
 
 export default function Share() {
   return (
-    <div>
-        <div className="shareContainer">
-      SHARE
-            <div className="shareWrapper">
-                <div className="shareTop">
-                <Avatar alt="Raoul MICHEL" src={PhotoProfil} />
-                    <input placeholder="Quoi de neuf Raoul ?" className="shareInput" />
-                </div>
-                <hr className="shareHr" />
-                <div className="shareBottom">
-                    <div className="shareOptions">
-                    <div className="shareOption">
-                            <PermMediaIcon className="shareIcon" htmlColor="#04c86a" />
-                            <span className="shareOptionText" >Photo / Vidéo</span>
-                        </div>
-                        <div className="shareOption">
-                            <LocalOfferIcon className="shareIcon" htmlColor="#3561ee"/>
-                            <span className="shareOptionText" >Identifier des amis</span>
-                        </div>
-                        <div className="shareOption">
-                            <LocationOnIcon className="shareIcon" htmlColor="#FD2D01" />
-                            <span className="shareOptionText" >Ajouter un lieu</span>
-                        </div>
-                        <div className="shareOption">
-                            <SentimentSatisfiedAltIcon className="shareIcon" htmlColor="#f8bd3c" />
-                            <span className="shareOptionText" >Humeur</span>
-                        </div>
-                    </div>
-                    <button className="shareButton">Publier</button>
-                </div>
-            </div>
-        </div>
-    </div>
-  )
+      <>
+     
+    <Card sx={{ maxWidth: "100% ", backgroundColor:"lightgrey"}}>
+
+        <StyledTextField
+                        sx={{ display: "flex"}}
+                        placeholder="Quoi de neuf, Raoul ?"
+                       
+                    />
+
+      <CardActions>
+
+        <Button size="small" style={{color: "#4e5166", borderRadius:"15px", backgroundColor:"#ffd7d7"}}>Partager</Button>
+        <Button size="small" style={{color: "#4e5166", borderRadius:"15px", backgroundColor:"#ffd7d7"}}>Ajouter des photos / vidéos</Button>
+      </CardActions>
+    </Card>
+    
+    </>
+  );
 }
