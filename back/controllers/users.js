@@ -2,7 +2,7 @@ const User = require("../models/User");
 const bcrypt = require("bcrypt");
 
 //update user
-export const updateUser = async (req, res) => {
+exports.updateUser = async (req, res) => {
     if (req.body.userId === req.params.id || req.body.isAdmin) {
         if (req.body.password) {
             try {
@@ -24,7 +24,7 @@ export const updateUser = async (req, res) => {
 };
 
 //Delete user
-export const deleteUser = async (req, res) => {
+exports.deleteUser = async (req, res) => {
     if (req.body.userId === req.params.id || req.body.isAdmin) {
         try {
             const user = await User.findByIdAndDelete(req.params.id);
@@ -38,7 +38,7 @@ export const deleteUser = async (req, res) => {
 };
 
 //Get a user
-export const getAUser = async (req, res) => {
+exports.getAUser = async (req, res) => {
     const userId = req.query.userId;
     const username = req.query.username;
     try {
@@ -51,7 +51,7 @@ export const getAUser = async (req, res) => {
 };
 
 //Get friends
-export const getFriends = async (req, res) => {
+exports.getFriends = async (req, res) => {
     try {
         const user = await User.findById(req.params.userId);
         const friends = await Promise.all(
@@ -71,7 +71,7 @@ export const getFriends = async (req, res) => {
 };
 
 //Follow a user
-export const followUser = async (req, res) => {
+exports.followUser = async (req, res) => {
     if (req.body.userId !== req.params.id) {
         try {
             const user = await User.findById(req.params.id);
@@ -81,18 +81,18 @@ export const followUser = async (req, res) => {
                 await currentUser.updateOne({ $push: { followings: req.params.id } });
                 res.status(200).json("user has been followed");
             } else {
-                res.status(403).json("you allready follow this user");
+                res.status(403).json("You already follow this user");
             }
         } catch (err) {
             res.status(500).json(err);
         }
     } else {
-        res.status(403).json("you cant follow yourself");
+        res.status(403).json("You can't follow yourself");
     }
 };
 
 //Unfollow a user
-export const unfollowUser = async (req, res) => {
+exports.unfollowUser = async (req, res) => {
     if (req.body.userId !== req.params.id) {
         try {
             const user = await User.findById(req.params.id);
@@ -100,15 +100,15 @@ export const unfollowUser = async (req, res) => {
             if (user.followers.includes(req.body.userId)) {
                 await user.updateOne({ $pull: { followers: req.body.userId } });
                 await currentUser.updateOne({ $pull: { followings: req.params.id } });
-                res.status(200).json("user has been unfollowed");
+                res.status(200).json("User has been unfollowed");
             } else {
-                res.status(403).json("you dont follow this user");
+                res.status(403).json("You don't follow this user");
             }
         } catch (err) {
             res.status(500).json(err);
         }
     } else {
-        res.status(403).json("you cant unfollow yourself");
+        res.status(403).json("You can't unfollow yourself");
     }
 }
 
