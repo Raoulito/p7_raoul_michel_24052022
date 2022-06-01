@@ -1,8 +1,8 @@
-import Home from "./pages/home/Home";
+import Leftbar from "./components/leftbar/Leftbar";
 
 function App() {
     return (
-    <Home />
+        <Leftbar />
     )
 }
 

@@ -22,6 +22,9 @@ import DynamicFeedIcon from "@mui/icons-material/DynamicFeed";
 import MessageIcon from "@mui/icons-material/Message";
 import OndemandVideoIcon from "@mui/icons-material/OndemandVideo";
 import GroupsIcon from "@mui/icons-material/Groups";
+import { Routes, Route } from "react-router-dom";
+import Home from "../../pages/home/Home";
+import { GroupoManiaRoutes } from "../../router/routes";
 
 const drawerWidth = 240;
 
@@ -81,10 +84,10 @@ function Leftbar(props) {
 
     const drawer = (
         <div>
-            <Toolbar >
-            <Box display="flex">
-                <img src={Logo} width="200px" />
-            </Box>
+            <Toolbar>
+                <Box display="flex">
+                    <img src={Logo} width="200px" />
+                </Box>
             </Toolbar>
             <Divider />
             <List>
@@ -111,7 +114,8 @@ function Leftbar(props) {
         </div>
     );
 
-    const container = window !== undefined ? () => window().document.body : undefined;
+    const container =
+        window !== undefined ? () => window().document.body : undefined;
 
     return (
         <Box sx={{ display: "flex" }}>
@@ -124,17 +128,27 @@ function Leftbar(props) {
                 }}
             >
                 <Toolbar>
-                    <IconButton color="inherit" aria-label="open drawer" edge="start" onClick={handleDrawerToggle} sx={{ mr: 2, display: { sm: "none" } }}>
+                    <IconButton
+                        color="inherit"
+                        aria-label="open drawer"
+                        edge="start"
+                        onClick={handleDrawerToggle}
+                        sx={{ mr: 2, display: { sm: "none" } }}
+                    >
                         <MenuIcon />
                     </IconButton>
                     <Topbar />
                 </Toolbar>
             </AppBar>
-            <Box component="nav" sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }} aria-label="mailbox folders">
+            <Box
+                component="nav"
+                sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+                aria-label="mailbox folders"
+            >
                 {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
                 <Drawer
                     container={container}
-                    variant="temporary"
+                    variant="persistent"
                     open={mobileOpen}
                     onClose={handleDrawerToggle}
                     ModalProps={{
@@ -163,6 +177,17 @@ function Leftbar(props) {
                 >
                     {drawer}
                 </Drawer>
+            </Box>
+            <Box
+                component="main"
+                sx={{
+                    flexGrow: 1,
+                    p: 3,
+                    width: { sm: `calc(100% - ${drawerWidth}px)` },
+                }}
+            >
+                <Toolbar />
+                <GroupoManiaRoutes />
             </Box>
         </Box>
     );
