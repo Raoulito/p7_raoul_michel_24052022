@@ -26,96 +26,96 @@ import { Routes, Route } from "react-router-dom";
 import Home from "../../pages/home/Home";
 import { GroupoManiaRoutes } from "../../router/routes";
 
-
 const drawerWidth = 240;
 
 function Leftbar(props) {
-    const { window } = props;
-    const [mobileOpen, setMobileOpen] = React.useState(false);
+  const { window } = props;
+  const [mobileOpen, setMobileOpen] = React.useState(false);
 
-    const menuLeftUp = [
-        {
-            name: "Fil d'actualités",
-            icon: <DynamicFeedIcon />,
-        },
-        {
-            name: "Messagerie",
-            icon: <MessageIcon />,
-        },
-        {
-            name: "Vidéos",
-            icon: <OndemandVideoIcon />,
-        },
-        {
-            name: "Vos groupes",
-            icon: <GroupsIcon />,
-        },
-        {
-            name: "Formations",
-            icon: <SchoolIcon />,
-        },
-        {
-            name: "Comité d'entreprise",
-            icon: <BeachAccessIcon />,
-        },
-        {
-            name: "Foire aux questions",
-            icon: <HelpOutlineIcon />,
-        },
-    ];
+  const menuLeftUp = [
+    {
+      name: "Fil d'actualités",
+      icon: <DynamicFeedIcon />,
+    },
+    {
+      name: "Messagerie",
+      icon: <MessageIcon />,
+    },
+    {
+      name: "Vidéos",
+      icon: <OndemandVideoIcon />,
+    },
+    {
+      name: "Vos groupes",
+      icon: <GroupsIcon />,
+    },
+    {
+      name: "Formations",
+      icon: <SchoolIcon />,
+    },
+    {
+      name: "Comité d'entreprise",
+      icon: <BeachAccessIcon />,
+    },
+    {
+      name: "Foire aux questions",
+      icon: <HelpOutlineIcon />,
+    },
+  ];
 
-    const menuLeftDown = [
-        {
-            name: "Bob",
-            photoProfil: "../../assets/person/2.jpeg",
-        },
-        {
-            name: "Alice",
-            photoProfil: "../../assets/person/3.jpeg",
-        },
-        {
-            name: "Carl",
-            photoProfil: "../../assets/person/4.jpeg",
-        },
-    ];
+  const menuLeftDown = [
+    {
+      name: "Bob",
+      photoProfil: "../../assets/person/2.jpeg",
+    },
+    {
+      name: "Alice",
+      photoProfil: "../../assets/person/3.jpeg",
+    },
+    {
+      name: "Carl",
+      photoProfil: "../../assets/person/4.jpeg",
+    },
+  ];
 
-    const handleDrawerToggle = () => {
-        setMobileOpen(!mobileOpen);
-    };
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
 
-    const drawer = (
-        <div>
-            <Toolbar >
-            <Box display="flex">
-                <img src={Logo} width="200px" />
-            </Box>
-            </Toolbar>
-            <Divider />
-            <List>
-                {menuLeftUp.map((entry, index) => (
-                    <ListItem key={index} disablePadding>
-                        <ListItemButton>
-                            <ListItemIcon>{entry.icon}</ListItemIcon>
-                            <ListItemText primary={entry.name} />
-                        </ListItemButton>
-                    </ListItem>
-                ))}
-            </List>
-            <Divider />
-            <List>
-                {menuLeftDown.map((entry, index) => (
-                    <ListItem key={index} disablePadding>
-                        <ListItemButton>
-                            <Avatar alt={entry.name} src={entry.photoProfil} />
-                            <ListItemText primary={entry.name} />
-                        </ListItemButton>
-                    </ListItem>
-                ))}
-            </List>
-        </div>
-    );
+  const drawer = (
+    <div>
+      <Toolbar>
+        <Box display="flex">
+          <img src={Logo} width="200px" />
+        </Box>
+      </Toolbar>
+      <Divider />
+      <List>
+        {menuLeftUp.map((entry, index) => (
+          <ListItem key={index} disablePadding>
+            <ListItemButton>
+              <ListItemIcon>{entry.icon}</ListItemIcon>
+              <ListItemText primary={entry.name} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+      <Divider />
+      <List>
+        {menuLeftDown.map((entry, index) => (
+          <ListItem key={index} disablePadding>
+            <ListItemButton>
+              <Avatar alt={entry.name} src={entry.photoProfil} />
+              <ListItemText primary={entry.name} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+    </div>
+  );
 
-    const container = window !== undefined ? () => window().document.body : undefined;
+  const container =
+    window !== undefined ? () => window().document.body : undefined;
 
   return (
     <Box sx={{ display: "flex" }}>
