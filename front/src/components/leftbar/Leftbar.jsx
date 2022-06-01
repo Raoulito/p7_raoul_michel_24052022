@@ -29,168 +29,168 @@ import { GroupoManiaRoutes } from "../../router/routes";
 const drawerWidth = 240;
 
 function Leftbar(props) {
-  const { window } = props;
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+    const { window } = props;
+    const [mobileOpen, setMobileOpen] = React.useState(false);
 
-  const menuLeftUp = [
-    {
-      name: "Fil d'actualités",
-      icon: <DynamicFeedIcon />,
-    },
-    {
-      name: "Messagerie",
-      icon: <MessageIcon />,
-    },
-    {
-      name: "Vidéos",
-      icon: <OndemandVideoIcon />,
-    },
-    {
-      name: "Vos groupes",
-      icon: <GroupsIcon />,
-    },
-    {
-      name: "Formations",
-      icon: <SchoolIcon />,
-    },
-    {
-      name: "Comité d'entreprise",
-      icon: <BeachAccessIcon />,
-    },
-    {
-      name: "Foire aux questions",
-      icon: <HelpOutlineIcon />,
-    },
-  ];
+    const menuLeftUp = [
+        {
+            name: "Fil d'actualités",
+            icon: <DynamicFeedIcon />,
+        },
+        {
+            name: "Messagerie",
+            icon: <MessageIcon />,
+        },
+        {
+            name: "Vidéos",
+            icon: <OndemandVideoIcon />,
+        },
+        {
+            name: "Vos groupes",
+            icon: <GroupsIcon />,
+        },
+        {
+            name: "Formations",
+            icon: <SchoolIcon />,
+        },
+        {
+            name: "Comité d'entreprise",
+            icon: <BeachAccessIcon />,
+        },
+        {
+            name: "Foire aux questions",
+            icon: <HelpOutlineIcon />,
+        },
+    ];
 
-  const menuLeftDown = [
-    {
-      name: "Bob",
-      photoProfil: "../../assets/person/2.jpeg",
-    },
-    {
-      name: "Alice",
-      photoProfil: "../../assets/person/3.jpeg",
-    },
-    {
-      name: "Carl",
-      photoProfil: "../../assets/person/4.jpeg",
-    },
-  ];
+    const menuLeftDown = [
+        {
+            name: "Bob",
+            photoProfil: "../../assets/person/2.jpeg",
+        },
+        {
+            name: "Alice",
+            photoProfil: "../../assets/person/3.jpeg",
+        },
+        {
+            name: "Carl",
+            photoProfil: "../../assets/person/4.jpeg",
+        },
+    ];
 
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
+    const handleDrawerToggle = () => {
+        setMobileOpen(!mobileOpen);
+    };
 
-  const drawer = (
-    <div>
-      <Toolbar>
-        <Box display="flex">
-          <img src={Logo} width="200px" />
+    const drawer = (
+        <div>
+            <Toolbar>
+                <Box display="flex">
+                    <img src={Logo} width="200px" />
+                </Box>
+            </Toolbar>
+            <Divider />
+            <List>
+                {menuLeftUp.map((entry, index) => (
+                    <ListItem key={index} disablePadding>
+                        <ListItemButton>
+                            <ListItemIcon>{entry.icon}</ListItemIcon>
+                            <ListItemText primary={entry.name} />
+                        </ListItemButton>
+                    </ListItem>
+                ))}
+            </List>
+            <Divider />
+            <List>
+                {menuLeftDown.map((entry, index) => (
+                    <ListItem key={index} disablePadding>
+                        <ListItemButton>
+                            <Avatar alt={entry.name} src={entry.photoProfil} />
+                            <ListItemText primary={entry.name} />
+                        </ListItemButton>
+                    </ListItem>
+                ))}
+            </List>
+        </div>
+    );
+
+    const container =
+        window !== undefined ? () => window().document.body : undefined;
+
+    return (
+        <Box sx={{ display: "flex" }}>
+            <CssBaseline />
+            <AppBar
+                position="fixed"
+                sx={{
+                    width: { sm: `calc(100% - ${drawerWidth}px)` },
+                    ml: { sm: `${drawerWidth}px` },
+                }}
+            >
+                <Toolbar>
+                    <IconButton
+                        color="inherit"
+                        aria-label="open drawer"
+                        edge="start"
+                        onClick={handleDrawerToggle}
+                        sx={{ mr: 2, display: { sm: "none" } }}
+                    >
+                        <MenuIcon />
+                    </IconButton>
+                    <Topbar />
+                </Toolbar>
+            </AppBar>
+            <Box
+                component="nav"
+                sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+                aria-label="mailbox folders"
+            >
+                {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+                <Drawer
+                    container={container}
+                    variant="persistent"
+                    open={mobileOpen}
+                    onClose={handleDrawerToggle}
+                    ModalProps={{
+                        keepMounted: true, // Better open performance on mobile.
+                    }}
+                    sx={{
+                        display: { xs: "block", sm: "none" },
+                        "& .MuiDrawer-paper": {
+                            boxSizing: "border-box",
+                            width: drawerWidth,
+                        },
+                    }}
+                >
+                    {drawer}
+                </Drawer>
+                <Drawer
+                    variant="permanent"
+                    sx={{
+                        display: { xs: "none", sm: "block" },
+                        "& .MuiDrawer-paper": {
+                            boxSizing: "border-box",
+                            width: drawerWidth,
+                        },
+                    }}
+                    open
+                >
+                    {drawer}
+                </Drawer>
+            </Box>
+            <Box
+                component="main"
+                sx={{
+                    flexGrow: 1,
+                    p: 3,
+                    width: { sm: `calc(100% - ${drawerWidth}px)` },
+                }}
+            >
+                <Toolbar />
+                <GroupoManiaRoutes />
+            </Box>
         </Box>
-      </Toolbar>
-      <Divider />
-      <List>
-        {menuLeftUp.map((entry, index) => (
-          <ListItem key={index} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>{entry.icon}</ListItemIcon>
-              <ListItemText primary={entry.name} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {menuLeftDown.map((entry, index) => (
-          <ListItem key={index} disablePadding>
-            <ListItemButton>
-              <Avatar alt={entry.name} src={entry.photoProfil} />
-              <ListItemText primary={entry.name} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-    </div>
-  );
-
-  const container =
-    window !== undefined ? () => window().document.body : undefined;
-
-  return (
-    <Box sx={{ display: "flex" }}>
-      <CssBaseline />
-      <AppBar
-        position="fixed"
-        sx={{
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
-          ml: { sm: `${drawerWidth}px` },
-        }}
-      >
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: "none" } }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Topbar />
-        </Toolbar>
-      </AppBar>
-      <Box
-        component="nav"
-        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-        aria-label="mailbox folders"
-      >
-        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-        <Drawer
-          container={container}
-          variant="persistent"
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
-          }}
-          sx={{
-            display: { xs: "block", sm: "none" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-              width: drawerWidth,
-            },
-          }}
-        >
-          {drawer}
-        </Drawer>
-        <Drawer
-          variant="permanent"
-          sx={{
-            display: { xs: "none", sm: "block" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-              width: drawerWidth,
-            },
-          }}
-          open
-        >
-          {drawer}
-        </Drawer>
-      </Box>
-      <Box
-        component="main"
-        sx={{
-          flexGrow: 1,
-          p: 3,
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
-        }}
-      >
-        <Toolbar />
-        <GroupoManiaRoutes />
-      </Box>
-    </Box>
-  );
+    );
 }
 
 export default Leftbar;
