@@ -56,7 +56,6 @@ const Topbar = () => {
     });
 
     return (
-        <AppBar position="sticky">
             <Container maxWidth="xl">
                 <Toolbar disableGutters sx={{ backgroundColor: "primary" }}>
                     <Box flexGrow={1} />
@@ -146,7 +145,6 @@ const Topbar = () => {
                     </Box>
                 </Toolbar>
             </Container>
-        </AppBar>
     );
 };
 
