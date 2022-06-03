@@ -109,21 +109,21 @@ function Leftbar(props) {
                     Amis en ligne
                 </Typography>
             </CardContent>
-            <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                <List sx={{ backgroundColor: "#ffd7d7", color: "#4e5166" }}>
-                    {onlineFriends.map((entry, index) => (
-                        <ListItem key={index} disablePadding>
-                            <ListItemButton>
-                                <StyledBadge overlap="circular" anchorOrigin={{ vertical: "top", horizontal: "right" }} variant="dot">
-                                    <Avatar alt={entry.name} src={entry.photoProfil} />
-                                </StyledBadge>
 
+            <List sx={{ backgroundColor: "#ffd7d7", color: "#4e5166" }}>
+                {onlineFriends.map((entry, index) => (
+                    <ListItem key={index} disablePadding>
+                        <ListItemButton>
+                            <StyledBadge overlap="circular" anchorOrigin={{ vertical: "top", horizontal: "right" }} variant="dot">
+                                <Avatar alt={entry.name} src={entry.photoProfil} />
+                            </StyledBadge>
+                            <Typography sx={{ mb: 1.5 }} color="text.secondary">
                                 <ListItemText primary={entry.name} sx={{ pl: "10px" }} />
-                            </ListItemButton>
-                        </ListItem>
-                    ))}
-                </List>
-            </Typography>
+                            </Typography>
+                        </ListItemButton>
+                    </ListItem>
+                ))}
+            </List>
         </div>
     );
 

@@ -8,20 +8,43 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Sandwich from "../../assets/post/sandwich.jpeg";
+import Like from "../../assets/like.png";
+import Heart from "../../assets/heart.png";
+import { Users } from "../../dummyData";
 
-export default function MediaCard() {
+export default function Post({ post }) {
+    console.log(post);
+
     return (
-        <Card sx={{ maxWidth: "100%", mt: "10px", backgroundColor: "lightgrey" }}>
+        <Card sx={{ maxWidth: "100%", mt: "10px", backgroundColor: "lightgrey", borderRadius: "15px" }}>
             <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
-                <Avatar sx={{ m: "5px" }} /> Kévin, le date/timeago
-            </Box>
-            <Box sx={{ px: "15px" }}>
-                <CardMedia sx={{ height: "240px", width: "100%", borderRadius: "15px", backgroundImage: `url(${Sandwich})` }} />
-            </Box>
 
+
+                {/* A FIX */} <Avatar sx={{ m: "5px" }} src={Users.filter((u) => u.id === post.userId)[0].profilePicture} />
+
+
+                {Users.filter((u) => u.id === post.userId)[0].username}, {post.date}
+            </Box>
             <CardContent>
                 <Typography variant="body2" color="text.secondary">
-                    Un sandwich à la rosette, miam miam.
+                    {post?.desc}
+                </Typography>
+            </CardContent>
+            <Box sx={{ px: "20px" }}>
+
+
+                {/* A FIX */} <CardMedia sx={{ width: "100%", borderRadius: "15px" }} component="img" alt="" height="240" src={post.photo} />
+
+                
+            </Box>
+            <Box sx={{ px: "15px", display: "flex", justifyContent: "flex-start", my: "10px" }}>
+                <CardMedia sx={{ mr: "15px", width: "25px", borderRadius: "50%" }} component="img" alt="Like" height="25" image={Like} />
+                <CardMedia sx={{ mr: "15px", width: "25px", borderRadius: "50%" }} component="img" alt="Love" height="25" image={Heart} />
+                {post.like} personne(s) aime(nt) ça.
+            </Box>
+            <CardContent>
+                <Typography variant="body2" color="text.secondary">
+                    {post.comment} commentaires.
                 </Typography>
             </CardContent>
             <CardActions>
