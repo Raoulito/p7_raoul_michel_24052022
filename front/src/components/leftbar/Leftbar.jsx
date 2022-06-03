@@ -84,24 +84,23 @@ function Leftbar(props) {
 
     const drawer = (
         <div>
-            <Toolbar>
+            <Toolbar disableGutters sx={{ backgroundColor: "#ffd7d7" }}>
                 <Box display="flex">
                     <img src={Logo} width="200px" />
                 </Box>
             </Toolbar>
-            <Divider />
-            <List>
+        <Divider sx={{color:"red"}}/>
+            <List sx={{ backgroundColor: "#4e5166", color:"#fff" }}>
                 {menuLeftUp.map((entry, index) => (
                     <ListItem key={index} disablePadding>
-                        <ListItemButton>
-                            <ListItemIcon>{entry.icon}</ListItemIcon>
+                        <ListItemButton >
+                            <ListItemIcon >{entry.icon}</ListItemIcon>
                             <ListItemText primary={entry.name} />
                         </ListItemButton>
                     </ListItem>
                 ))}
             </List>
-            <Divider />
-            <List>
+            <List sx={{ backgroundColor: "#ffd7d7", color:"#4e5166" }}>
                 {menuLeftDown.map((entry, index) => (
                     <ListItem key={index} disablePadding>
                         <ListItemButton>

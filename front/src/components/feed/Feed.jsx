@@ -2,14 +2,13 @@ import Post from "../post/Post";
 import Share from "../share/Share";
 import "./feed.css";
 
-export default function Feed () {
+export default function Feed() {
     return (
-        <div className="feed">feed
+        <div className="feed"  sx={{width:"10%"}}>
             <div className="feedWrapper">
-                <Share/>
+                <Share />
                 <Post />
             </div>
-            
         </div>
-    )
+    );
 }

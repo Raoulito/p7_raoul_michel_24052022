@@ -1,4 +1,5 @@
 import * as React from 'react';
+import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -28,18 +29,20 @@ export default function Share() {
   return (
       <>
      
-    <Card sx={{ maxWidth: "100% ", backgroundColor:"lightgrey"}}>
+    <Card sx={{ maxWidth: "100% ", backgroundColor:"lightgrey", display:"flex"}}>
+
 
         <StyledTextField
-                        sx={{ display: "flex"}}
+                        sx={{ display: "flex", height:"50px", width:"100%", margin:"10px"}}
                         placeholder="Quoi de neuf, Raoul ?"
                        
                     />
 
       <CardActions>
 
-        <Button size="small" style={{color: "#4e5166", borderRadius:"15px", backgroundColor:"#ffd7d7"}}>Partager</Button>
-        <Button size="small" style={{color: "#4e5166", borderRadius:"15px", backgroundColor:"#ffd7d7"}}>Ajouter des photos / vidéos</Button>
+        <Button size="small" style={{color: "#4e5166", borderRadius:"15px", backgroundColor:"#ffd7d7", height:"50px"}}>Ajouter des photos / vidéos</Button>
+        
+        <Button size="small" style={{color: "#4e5166", borderRadius:"15px", backgroundColor:"#ffd7d7", height:"50px"}}>Publier</Button>
       </CardActions>
     </Card>
     
