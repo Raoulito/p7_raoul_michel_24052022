@@ -25,6 +25,9 @@ import GroupsIcon from "@mui/icons-material/Groups";
 import { Routes, Route } from "react-router-dom";
 import Home from "../../pages/home/Home";
 import { GroupoManiaRoutes } from "../../router/routes";
+import Typography from "@mui/material/Typography";
+import CardContent from "@mui/material/CardContent";
+import StyledBadge from "@mui/material/Badge";
 
 const drawerWidth = 240;
 
@@ -63,17 +66,17 @@ function Leftbar(props) {
         },
     ];
 
-    const menuLeftDown = [
+    const onlineFriends = [
         {
-            name: "Bob",
+            name: "Bob Bobby",
             photoProfil: "../../assets/person/2.jpeg",
         },
         {
-            name: "Alice",
+            name: "Alice Alice",
             photoProfil: "../../assets/person/3.jpeg",
         },
         {
-            name: "Carl",
+            name: "Carl Carlito",
             photoProfil: "../../assets/person/4.jpeg",
         },
     ];
@@ -89,32 +92,42 @@ function Leftbar(props) {
                     <img src={Logo} width="200px" />
                 </Box>
             </Toolbar>
-        <Divider sx={{color:"red"}}/>
-            <List sx={{ backgroundColor: "#4e5166", color:"#fff" }}>
+            <Divider />
+            <List sx={{ backgroundColor: "#4e5166", color: "#fff" }}>
                 {menuLeftUp.map((entry, index) => (
                     <ListItem key={index} disablePadding>
-                        <ListItemButton >
-                            <ListItemIcon >{entry.icon}</ListItemIcon>
-                            <ListItemText primary={entry.name} />
-                        </ListItemButton>
-                    </ListItem>
-                ))}
-            </List>
-            <List sx={{ backgroundColor: "#ffd7d7", color:"#4e5166" }}>
-                {menuLeftDown.map((entry, index) => (
-                    <ListItem key={index} disablePadding>
                         <ListItemButton>
-                            <Avatar alt={entry.name} src={entry.photoProfil} />
+                            <ListItemIcon>{entry.icon}</ListItemIcon>
                             <ListItemText primary={entry.name} />
                         </ListItemButton>
                     </ListItem>
                 ))}
             </List>
+            <Divider />
+            <CardContent sx={{ backgroundColor: "#ffd7d7" }}>
+                <Typography sx={{ fontSize: 18 }} color="text.secondary" gutterBottom>
+                    Amis en ligne
+                </Typography>
+            </CardContent>
+            <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                <List sx={{ backgroundColor: "#ffd7d7", color: "#4e5166" }}>
+                    {onlineFriends.map((entry, index) => (
+                        <ListItem key={index} disablePadding>
+                            <ListItemButton>
+                                <StyledBadge overlap="circular" anchorOrigin={{ vertical: "top", horizontal: "right" }} variant="dot">
+                                    <Avatar alt={entry.name} src={entry.photoProfil} />
+                                </StyledBadge>
+
+                                <ListItemText primary={entry.name} sx={{ pl: "10px" }} />
+                            </ListItemButton>
+                        </ListItem>
+                    ))}
+                </List>
+            </Typography>
         </div>
     );
 
-    const container =
-        window !== undefined ? () => window().document.body : undefined;
+    const container = window !== undefined ? () => window().document.body : undefined;
 
     return (
         <Box sx={{ display: "flex" }}>
@@ -127,23 +140,13 @@ function Leftbar(props) {
                 }}
             >
                 <Toolbar>
-                    <IconButton
-                        color="inherit"
-                        aria-label="open drawer"
-                        edge="start"
-                        onClick={handleDrawerToggle}
-                        sx={{ mr: 2, display: { sm: "none" } }}
-                    >
+                    <IconButton color="inherit" aria-label="open drawer" edge="start" onClick={handleDrawerToggle} sx={{ mr: 2, display: { sm: "none" } }}>
                         <MenuIcon />
                     </IconButton>
                     <Topbar />
                 </Toolbar>
             </AppBar>
-            <Box
-                component="nav"
-                sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-                aria-label="mailbox folders"
-            >
+            <Box component="nav" sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }} aria-label="mailbox folders">
                 {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
                 <Drawer
                     container={container}

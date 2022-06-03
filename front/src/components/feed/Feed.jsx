@@ -4,11 +4,10 @@ import "./feed.css";
 
 export default function Feed() {
     return (
-        <div className="feed"  sx={{width:"10%"}}>
-            <div className="feedWrapper">
+        <div>
+            
                 <Share />
                 <Post />
-            </div>
         </div>
     );
 }

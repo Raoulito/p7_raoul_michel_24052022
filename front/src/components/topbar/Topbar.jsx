@@ -4,7 +4,6 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
@@ -21,19 +20,14 @@ import styled from "@emotion/styled";
 const settings = ["Profil", "Mon compte", "Déconnexion"];
 
 const Topbar = () => {
-    const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-    const handleOpenNavMenu = (event) => {
-        setAnchorElNav(event.currentTarget);
-    };
+
     const handleOpenUserMenu = (event) => {
         setAnchorElUser(event.currentTarget);
     };
 
-    const handleCloseNavMenu = () => {
-        setAnchorElNav(null);
-    };
+
 
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
@@ -58,7 +52,7 @@ const Topbar = () => {
             <Toolbar disableGutters sx={{ backgroundColor: "primary" }}>
                 <Box flexGrow={1} />
                 <StyledTextField
-                    sx={{ display: "flex" }}
+                    sx={{ display: "flex", height: "45px", justifyContent: "center", width: "100%", margin: "10px" }}
                     placeholder="Que recherchez-vous ?"
                     InputProps={{
                         "aria-label": "search",
@@ -70,57 +64,17 @@ const Topbar = () => {
                     }}
                 />
 
-                {/* <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-                    <IconButton
-                        size="large"
-                        aria-label="account of current user"
-                        aria-controls="menu-appbar"
-                        aria-haspopup="true"
-                        onClick={handleOpenNavMenu}
-                        color="secondary"
-                    >
-                        <MenuIcon />
-                    </IconButton>
-                    <Menu
-                        id="menu-appbar"
-                        anchorEl={anchorElNav}
-                        anchorOrigin={{
-                            vertical: "bottom",
-                            horizontal: "right",
-                        }}
-                        keepMounted
-                        transformOrigin={{
-                            vertical: "top",
-                            horizontal: "left",
-                        }}
-                        open={Boolean(anchorElNav)}
-                        onClose={handleCloseNavMenu}
-                        sx={{
-                            display: { xs: "block", md: "none" },
-                        }}
-                    ></Menu>
-                </Box> */}
-
                 <Box sx={{ flexGrow: 1 }} />
 
                 <MenuItem>
-                    <IconButton
-                        size="large"
-                        aria-label="Vous avez 4 messages"
-                        color="inherit"
-                    >
+                    <IconButton size="large" aria-label="Vous avez 4 messages" color="inherit">
                         <Badge badgeContent={4} color="error">
                             <MessageIcon />
                         </Badge>
                     </IconButton>
                 </MenuItem>
                 <MenuItem>
-                    <IconButton
-                        size="large"
-                        aria-label="Vous avez 17 notifications"
-                        color="inherit"
-                        sx={{ pr: 2 }}
-                    >
+                    <IconButton size="large" aria-label="Vous avez 17 notifications" color="inherit" sx={{ pr: 2 }}>
                         <Badge badgeContent={17} color="error">
                             <NotificationsIcon />
                         </Badge>
