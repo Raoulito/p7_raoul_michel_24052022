@@ -17,17 +17,15 @@ import Topbar from "../topbar/Topbar";
 import SchoolIcon from "@mui/icons-material/School";
 import BeachAccessIcon from "@mui/icons-material/BeachAccess";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
-import Avatar from "@mui/material/Avatar";
 import DynamicFeedIcon from "@mui/icons-material/DynamicFeed";
 import MessageIcon from "@mui/icons-material/Message";
 import OndemandVideoIcon from "@mui/icons-material/OndemandVideo";
 import GroupsIcon from "@mui/icons-material/Groups";
-import { Routes, Route } from "react-router-dom";
-import Home from "../../pages/home/Home";
-import { GroupoManiaRoutes } from "../../router/routes";
-import Typography from "@mui/material/Typography";
+import Online from "../online/Online";
 import CardContent from "@mui/material/CardContent";
-import StyledBadge from "@mui/material/Badge";
+import Typography from "@mui/material/Typography";
+import { GroupoManiaRoutes } from "../../router/routes";
+import { Users } from "../../dummyData";
 
 const drawerWidth = 240;
 
@@ -66,21 +64,6 @@ function Leftbar(props) {
         },
     ];
 
-    const onlineFriends = [
-        {
-            name: "Bob Bobby",
-            photoProfil: "../../assets/person/2.jpeg",
-        },
-        {
-            name: "Alice Alice",
-            photoProfil: "../../assets/person/3.jpeg",
-        },
-        {
-            name: "Carl Carlito",
-            photoProfil: "../../assets/person/4.jpeg",
-        },
-    ];
-
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
@@ -88,7 +71,7 @@ function Leftbar(props) {
     const drawer = (
         <div>
             <Toolbar disableGutters sx={{ backgroundColor: "#ffd7d7" }}>
-                <Box display="flex">
+                <Box display="flex" sx={{ position:"sticky"}}>
                     <img src={Logo} width="200px" />
                 </Box>
             </Toolbar>
@@ -104,26 +87,15 @@ function Leftbar(props) {
                 ))}
             </List>
             <Divider />
+
             <CardContent sx={{ backgroundColor: "#ffd7d7" }}>
-                <Typography sx={{ fontSize: 18 }} color="text.secondary" gutterBottom>
+                <Typography sx={{ fontSize: 18, fontWeight:"bold" }} color="text.secondary" gutterBottom>
                     Amis en ligne
                 </Typography>
             </CardContent>
-
-            <List sx={{ backgroundColor: "#ffd7d7", color: "#4e5166" }}>
-                {onlineFriends.map((entry, index) => (
-                    <ListItem key={index} disablePadding>
-                        <ListItemButton>
-                            <StyledBadge overlap="circular" anchorOrigin={{ vertical: "top", horizontal: "right" }} variant="dot">
-                                <Avatar alt={entry.name} src={entry.photoProfil} />
-                            </StyledBadge>
-                            <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                                <ListItemText primary={entry.name} sx={{ pl: "10px" }} />
-                            </Typography>
-                        </ListItemButton>
-                    </ListItem>
-                ))}
-            </List>
+            {Users.map((u) => (
+                <Online key={u.id} user={u} />
+            ))}
         </div>
     );
 

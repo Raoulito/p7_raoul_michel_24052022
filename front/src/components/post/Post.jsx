@@ -8,19 +8,27 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Sandwich from "../../assets/post/sandwich.jpeg";
-import Like from "../../assets/like.png";
-import Heart from "../../assets/heart.png";
+import Like from "../../assets/reactions/like.png";
+import Heart from "../../assets/reactions/heart.png";
+import { useState } from "react";
 import { Users } from "../../dummyData";
 
 export default function Post({ post }) {
-    console.log(post);
+
+const [like, setLike] = useState(post.like);
+const [isLiked, setIsLiked] = useState(false);
+const likeHandler = () => {
+    setLike(isLiked ? like -1 : like +1);
+    setIsLiked(!isLiked); 
+
+}
 
     return (
         <Card sx={{ maxWidth: "100%", mt: "10px", backgroundColor: "lightgrey", borderRadius: "15px" }}>
             <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
 
 
-                {/* A FIX */} <Avatar sx={{ m: "5px" }} src={Users.filter((u) => u.id === post.userId)[0].profilePicture} />
+                {/* NEEDS FIX */} <Avatar sx={{ m: "5px" }} src={Users.filter((u) => u.id === post.userId)[0].profilePicture} />
 
 
                 {Users.filter((u) => u.id === post.userId)[0].username}, {post.date}
@@ -33,18 +41,18 @@ export default function Post({ post }) {
             <Box sx={{ px: "20px" }}>
 
 
-                {/* A FIX */} <CardMedia sx={{ width: "100%", borderRadius: "15px" }} component="img" alt="" height="240" src={post.photo} />
+                {/* NEEDS FIX */} <CardMedia sx={{ width: "100%", borderRadius: "15px" }} component="img" alt="" height="240" src={post.photo} />
 
                 
             </Box>
             <Box sx={{ px: "15px", display: "flex", justifyContent: "flex-start", my: "10px" }}>
-                <CardMedia sx={{ mr: "15px", width: "25px", borderRadius: "50%" }} component="img" alt="Like" height="25" image={Like} />
-                <CardMedia sx={{ mr: "15px", width: "25px", borderRadius: "50%" }} component="img" alt="Love" height="25" image={Heart} />
-                {post.like} personne(s) aime(nt) ça.
+                <CardMedia sx={{ mr: "15px", width: "25px", borderRadius: "50%", cursor:"pointer" }} component="img" alt="Like" height="25" image={Like} onClick={likeHandler}/>
+                <CardMedia sx={{ mr: "15px", width: "25px", borderRadius: "50%", cursor:"pointer" }} component="img" alt="Love" height="25" image={Heart} onClick={likeHandler}/>
+                {like} personne(s) aime(nt) ça.
             </Box>
             <CardContent>
                 <Typography variant="body2" color="text.secondary">
-                    {post.comment} commentaires.
+                    {post.comment} commentaire(s).
                 </Typography>
             </CardContent>
             <CardActions>

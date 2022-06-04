@@ -16,18 +16,29 @@ import SearchIcon from "@mui/icons-material/Search";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import styled from "@emotion/styled";
+import { Link } from "react-router-dom";
 
-const settings = ["Profil", "Mon compte", "Déconnexion"];
+const settings = [
+    {
+        label: "Profil",
+        to: "/profile",
+    },
+    {
+        label: "Mon compte",
+        to: "/account",
+    },
+    {
+        label: "Déconnexion",
+        to: "/logout",
+    },
+];
 
 const Topbar = () => {
     const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-
     const handleOpenUserMenu = (event) => {
         setAnchorElUser(event.currentTarget);
     };
-
-
 
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
@@ -104,9 +115,13 @@ const Topbar = () => {
                         onClose={handleCloseUserMenu}
                     >
                         {settings.map((setting) => (
-                            <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                <Typography textAlign="center">{setting}</Typography>
-                            </MenuItem>
+                            <Link to={setting.to} style={{ textDecoration: "none", color: "#4e5166" }}>
+                                <Typography textAlign="center">
+                                    <MenuItem key={setting.label} onClick={handleCloseUserMenu}>
+                                        {setting.label}
+                                    </MenuItem>
+                                </Typography>
+                            </Link>
                         ))}
                     </Menu>
                 </Box>
