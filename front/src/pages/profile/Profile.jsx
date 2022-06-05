@@ -4,11 +4,34 @@ import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Avatar from "@mui/material/Avatar";
+import { styled } from '@mui/material/styles';
+import Collapse from '@mui/material/Collapse';
+import IconButton from '@mui/material/IconButton';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Box from '@mui/material/Box';
+import { Users } from "../../dummyData";
+import Online from "../../components/online/Online";
+
+const ExpandMore = styled((props) => {
+  const { expand, ...other } = props;
+  return <IconButton {...other} />;
+})(({ theme, expand }) => ({
+  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+  marginLeft: 'auto',
+  transition: theme.transitions.create('transform', {
+    duration: theme.transitions.duration.shortest,
+  }),
+}));
+
 
 export default function Profile() {
+  const [expanded, setExpanded] = React.useState(false);
+  
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
     return (
       <>
         <Card sx={{ maxWidth: "100%", backgroundColor: "lightgrey", borderRadius: "15px", display: "flex", flexDirection: "column" }}>
@@ -22,25 +45,62 @@ export default function Profile() {
             <Typography variant="h5" component="div">
 Bio        </Typography>
         </Card>
-        <Card sx={{ minWidth: 275 }}>
+
+        <Card sx={{ minWidth: 275, borderRadius: "15px", my:"10px", display:"flex", flexDirection:"row" }}>
       <CardContent>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          Ville actuelle
+          De Le Puy-en-Velay
         </Typography>
         <Typography variant="h5" component="div">
-Ville d'origine
+          Habite à Tirana
         </Typography>
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          Date de naissance
+          Né le 28/04/1981, 41 ans.
+        </Typography>
+        <Typography sx={{ mb: 1.5 }} color="text.secondary">
+          En couple.
         </Typography>
         <Typography variant="body2">
-          well meaning and kindly.
-
+          10 ami((e)s), 5 en ligne.
+        </Typography>
+        <Typography variant="body2">
+          14 abonnement(s).
         </Typography>
       </CardContent>
-      <CardActions>
-        <Button size="small">Learn More</Button>
+
+<Box flexGrow={1}/>
+
+    <Card sx={{ maxWidth: 240 }}>
+
+
+    <CardActions>
+Voir tous vos amis
+        <ExpandMore
+          expand={expanded}
+          onClick={handleExpandClick}
+          aria-expanded={expanded}
+          aria-label="show more"
+        >
+          <ExpandMoreIcon />
+        </ExpandMore>
       </CardActions>
+      <Collapse in={expanded} timeout="auto" unmountOnExit>
+        <CardContent>
+
+
+        <Typography paragraph>
+          
+        {Users.map((u) => (
+            <Online key={u.id} user={u} />
+          ))}
+          
+        </Typography>
+
+ 
+        </CardContent>
+      </Collapse>
+    </Card>
+
     </Card>
     <Feed/>
         </>

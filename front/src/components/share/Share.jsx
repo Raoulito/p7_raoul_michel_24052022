@@ -4,6 +4,8 @@ import CardActions from "@mui/material/CardActions";
 import Button from "@mui/material/Button";
 import styled from "@emotion/styled";
 import TextField from "@mui/material/TextField";
+import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
+import IosShareIcon from '@mui/icons-material/IosShare';
 
 const StyledTextField = styled(TextField)({
     backgroundColor: "#fff",
@@ -28,11 +30,11 @@ export default function Share() {
 
                 <CardActions>
                     <Button size="small" style={{ color: "#4e5166", borderRadius: "15px", backgroundColor: "#ffd7d7", height: "50px" }}>
-                        Ajouter des photos / vidéos
+                        <AddPhotoAlternateIcon/>
                     </Button>
 
                     <Button size="small" style={{ color: "#4e5166", borderRadius: "15px", backgroundColor: "#ffd7d7", height: "50px" }}>
-                        Publier
+                        <IosShareIcon/>
                     </Button>
                 </CardActions>
             </Card>

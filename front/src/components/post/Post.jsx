@@ -7,11 +7,13 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import Sandwich from "../../assets/post/sandwich.jpeg";
+import ShareIcon from '@mui/icons-material/Share';
 import Like from "../../assets/reactions/like.png";
 import Heart from "../../assets/reactions/heart.png";
+import CommentIcon from '@mui/icons-material/Comment';
 import { useState } from "react";
 import { Users } from "../../dummyData";
+
 
 export default function Post({ post }) {
 
@@ -38,7 +40,7 @@ const likeHandler = () => {
                     {post?.desc}
                 </Typography>
             </CardContent>
-            <Box sx={{ px: "20px" }}>
+            <Box sx={{ px: "15px" }}>
 
 
                 {/* NEEDS FIX */} <CardMedia sx={{ width: "100%", borderRadius: "15px" }} component="img" alt="" height="240" src={post.photo} />
@@ -56,11 +58,11 @@ const likeHandler = () => {
                 </Typography>
             </CardContent>
             <CardActions>
-                <Button size="small" style={{ color: "#4e5166", borderRadius: "15px", backgroundColor: "#ffd7d7", height: "50px" }}>
-                    Partager
+                <Button size="small" style={{ color: "#4e5166", borderRadius: "15px", backgroundColor: "#ffd7d7", height: "50px", alt:"Partager" }}>
+                    <ShareIcon/>
                 </Button>
                 <Button size="small" style={{ color: "#4e5166", borderRadius: "15px", backgroundColor: "#ffd7d7", height: "50px" }}>
-                    Commenter
+                    <CommentIcon/>
                 </Button>
             </CardActions>
         </Card>

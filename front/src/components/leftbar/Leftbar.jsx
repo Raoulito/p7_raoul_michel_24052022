@@ -71,7 +71,7 @@ function Leftbar(props) {
     const drawer = (
         <div>
             <Toolbar disableGutters sx={{ backgroundColor: "#ffd7d7" }}>
-                <Box display="flex" sx={{ position:"sticky"}}>
+                <Box display="flex" sx={{ position: "sticky" }}>
                     <img src={Logo} width="200px" />
                 </Box>
             </Toolbar>
@@ -89,7 +89,7 @@ function Leftbar(props) {
             <Divider />
 
             <CardContent sx={{ backgroundColor: "#ffd7d7" }}>
-                <Typography sx={{ fontSize: 18, fontWeight:"bold" }} color="text.secondary" gutterBottom>
+                <Typography sx={{ fontSize: 18, fontWeight: "bold" }} color="text.secondary" gutterBottom>
                     Amis en ligne
                 </Typography>
             </CardContent>
@@ -118,7 +118,7 @@ function Leftbar(props) {
                     <Topbar />
                 </Toolbar>
             </AppBar>
-            <Box component="nav" sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }} aria-label="mailbox folders">
+            <Box component="nav" sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }} aria-label="raccourcis">
                 {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
                 <Drawer
                     container={container}
