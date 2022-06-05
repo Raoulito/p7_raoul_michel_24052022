@@ -37,13 +37,13 @@ export default function Profile() {
         <Card sx={{ maxWidth: "100%", backgroundColor: "lightgrey", borderRadius: "15px", display: "flex", flexDirection: "column" }}>
             <CardMedia component="img" height="220" image="/static/images/cards/contemplative-reptile.jpg" alt="Photo de couverture" />
             <CardContent sx={{ display: "flex", pl:"50px" }}>
-                <Avatar alt="Photo de profile" src="/static/images/avatar/1.jpg" sx={{ width: 180, height: 180, zIndex:"1" }} />
+                <Avatar alt="Photo de profil" src="/static/images/avatar/1.jpg" sx={{ width: 180, height: 180, zIndex:"1" }} />
             </CardContent>
             <Typography variant="body2" color="text.secondary" sx={{ fontWeight: "bold", fontSize: "2.5em", mt: "-50px", pl:"100px", zIndex: "2" }}>
                 Username
             </Typography>
             <Typography variant="h5" component="div">
-              
+
 Bio        </Typography>
         </Card>
 
