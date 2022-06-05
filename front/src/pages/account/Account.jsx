@@ -18,6 +18,7 @@ export default function Account() {
     <div>
       Relation :
     </div>
+    <button>Supprimer mon compte</button>
     </>
   )
 }
