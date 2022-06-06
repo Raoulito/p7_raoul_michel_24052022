@@ -7,11 +7,12 @@ import Logo from "../../assets/logos/icon-left-font.png";
 import { useState } from "react";
 
 export const Register = ({ onSubmit }) => {
+    const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [pwd, setPwd] = useState("");
     const submit = (e) => {
         e.preventDefault();
-        onSubmit(email, pwd);
+        onSubmit(username, email, pwd);
         console.log(email, pwd);
     };
 
@@ -24,15 +25,19 @@ export const Register = ({ onSubmit }) => {
                     <img src={Logo} width="300px" alt="Logo Groupomania"/>
                 </Box>
                 <Card sx={{ maxWidth: "50%", backgroundColor: "lightgrey", borderRadius: "15px", display: "flex", flexDirection: "row", mb: "15px" }}>
-                    <CardContent sx={{ display: "flex", textAlign: "center", justifyContent: "center" }}>Créez votre compte simplement, un email et un mot de passe suffisent !</CardContent>
+                    <CardContent sx={{ display: "flex", textAlign: "center", justifyContent: "center" }}>Créez votre compte simplement. Votre nom, un email et un mot de passe suffisent !</CardContent>
                 </Card>
 
                 <Card sx={{ maxWidth: "50%", backgroundColor: "lightgrey", borderRadius: "15px", mb: "15px" }}>
-                    <TextField type="email" label="Email" color="secondary" focused variant="filled" sx={{ width: "100%" }} onChange={(e) => setEmail(e.target.value)} />
+                    <TextField type="text" label="Votre nom :" color="secondary" focused variant="filled" sx={{ width: "100%" }} onChange={(e) => setUsername(e.target.value)} />
                 </Card>
 
                 <Card sx={{ maxWidth: "50%", backgroundColor: "lightgrey", borderRadius: "15px", mb: "15px" }}>
-                    <TextField type="password" label="Mot de passe" color="secondary" focused variant="filled" sx={{ width: "100%" }} onChange={(e) => setPwd(e.target.value)} />
+                    <TextField type="email" label="Votre email :" color="secondary" focused variant="filled" sx={{ width: "100%" }} onChange={(e) => setEmail(e.target.value)} />
+                </Card>
+
+                <Card sx={{ maxWidth: "50%", backgroundColor: "lightgrey", borderRadius: "15px", mb: "15px" }}>
+                    <TextField type="password" label="Mot de passe :" color="secondary" focused variant="filled" sx={{ width: "100%" }} onChange={(e) => setPwd(e.target.value)} />
                 </Card>
 
                 <Button variant="contained" onClick={submit}>Créer mon compte</Button>
