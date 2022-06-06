@@ -3,17 +3,19 @@ import Home from "../pages/home/Home";
 import Profile from "../pages/profile/Profile";
 import Account from "../pages/account/Account";
 import {Login} from "../pages/login/Login";
-import {Register} from "../pages/register/Register";
+import Register from "../pages/register/Register";
+import Logout from "../pages/logout/Logout";
 
 
 export const GroupoManiaRoutes = () => {
     return (
         <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/profile/:username" element={<Profile />} />
+            <Route path="/profile" element={<Profile />} />
             <Route path="/account" element={<Account />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/logout" element={<Logout />} />
         </Routes>
     );
 };

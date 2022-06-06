@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import Button from "@mui/material/Button";
 
 export const Logout = () => {
     const navigate = useNavigate();
@@ -7,8 +8,6 @@ export const Logout = () => {
         navigate("/login");
     };
     return (
-        <button onClick={logout}>
-            Log out
-        </button>
+                <Button variant="contained" onClick={logout}>Me déconnecter</Button>    
     );
 };

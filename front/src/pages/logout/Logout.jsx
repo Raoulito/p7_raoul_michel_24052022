@@ -1,7 +1,7 @@
-import Logout from '../../components/common/Logout';
+import {Logout} from "../../components/common/logout";
 
 
-export default function LogoutDisconnect() {
+export default function Disconnect() {
   return (
     <div>
       <Logout/>

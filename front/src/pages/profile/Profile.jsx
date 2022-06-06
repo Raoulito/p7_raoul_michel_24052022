@@ -27,6 +27,8 @@ const ExpandMore = styled((props) => {
 
 
 export default function Profile() {
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+
   const [expanded, setExpanded] = React.useState(false);
   
   const handleExpandClick = () => {
@@ -35,16 +37,16 @@ export default function Profile() {
     return (
       <>
         <Card sx={{ maxWidth: "100%", backgroundColor: "lightgrey", borderRadius: "15px", display: "flex", flexDirection: "column" }}>
-            <CardMedia component="img" height="220" image="/static/images/cards/contemplative-reptile.jpg" alt="Photo de couverture" />
-            <CardContent sx={{ display: "flex", pl:"50px" }}>
-                <Avatar alt="Photo de profil" src="/static/images/avatar/1.jpg" sx={{ width: 180, height: 180, zIndex:"1" }} />
+            <CardMedia component="img" height="280" src={`${PF}post/sandwich.jpeg`} alt="Photo de couverture" sx={{borderRadius:"15px"}}/>
+            <CardContent sx={{ display: "flex", pl:"50px" }} >
+                <Avatar alt="Photo de profil" src={`${PF}person/1.jpeg`} sx={{ width: 180, height: 180, zIndex:"1", mt:"-200px" }} />
             </CardContent>
-            <Typography variant="body2" color="text.secondary" sx={{ fontWeight: "bold", fontSize: "2.5em", mt: "-50px", pl:"100px", zIndex: "2" }}>
+            <Typography variant="body2" color="text.secondary" sx={{ fontWeight: "bold", fontSize: "2.5em", mt: "-40px", pl:"100px" }}>
                 Username
             </Typography>
-            <Typography variant="h5" component="div">
-
-Bio        </Typography>
+            <Typography variant="h5" component="div" sx={{ fontWeight: "300", ml:"40px" }}>
+              Bio
+         </Typography>
         </Card>
 
         <Card sx={{ minWidth: 275, borderRadius: "15px", my:"10px", display:"flex", flexDirection:"row" }}>

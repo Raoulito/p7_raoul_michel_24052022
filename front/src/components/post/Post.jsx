@@ -8,8 +8,6 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import ShareIcon from "@mui/icons-material/Share";
-import Like from "../../assets/reactions/like.png";
-import Heart from "../../assets/reactions/heart.png";
 import CommentIcon from "@mui/icons-material/Comment";
 import { useState } from "react";
 import { Users } from "../../dummyData";
@@ -38,8 +36,8 @@ export default function Post({ post }) {
                 {/* NEEDS FIX */} <CardMedia sx={{ width: "100%", borderRadius: "15px" }} component="img" alt="" height="240" src={PF+post.photo} />
             </Box>
             <Box sx={{ px: "15px", display: "flex", justifyContent: "flex-start", my: "10px" }}>
-                <CardMedia sx={{ mr: "15px", width: "25px", borderRadius: "50%", cursor: "pointer" }} component="img" alt="Like" height="25" image={Like} onClick={likeHandler} />
-                <CardMedia sx={{ mr: "15px", width: "25px", borderRadius: "50%", cursor: "pointer" }} component="img" alt="Love" height="25" image={Heart} onClick={likeHandler} />
+                <CardMedia sx={{ mr: "15px", width: "25px", borderRadius: "50%", cursor: "pointer" }} component="img" alt="Like" height="25" src={`${PF}/reactions/like.png`} onClick={likeHandler} />
+                <CardMedia sx={{ mr: "15px", width: "25px", borderRadius: "50%", cursor: "pointer" }} component="img" alt="Love" height="25" src={`${PF}/reactions/heart.png`} onClick={likeHandler} />
                 {like} personne(s) aime(nt) ça.
             </Box>
             <CardContent>
