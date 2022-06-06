@@ -26,6 +26,7 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { GroupoManiaRoutes } from "../../router/routes";
 import { Users } from "../../dummyData";
+import Link from "@mui/material/Link";
 
 const drawerWidth = 240;
 
@@ -37,30 +38,37 @@ function Leftbar(props) {
         {
             name: "Fil d'actualités",
             icon: <DynamicFeedIcon />,
+            to: "/",
         },
         {
             name: "Messagerie",
             icon: <MessageIcon />,
+            to: "/chat",
         },
         {
             name: "Vidéos",
             icon: <OndemandVideoIcon />,
+            to: "/videos",
         },
         {
             name: "Vos groupes",
             icon: <GroupsIcon />,
+            to: "/groups",
         },
         {
             name: "Formations",
             icon: <SchoolIcon />,
+            to: "/school",
         },
         {
             name: "Comité d'entreprise",
             icon: <BeachAccessIcon />,
+            to: "/holidays",
         },
         {
             name: "Foire aux questions",
             icon: <HelpOutlineIcon />,
+            to: "/faq",
         },
     ];
 
@@ -72,7 +80,7 @@ function Leftbar(props) {
         <div>
             <Toolbar disableGutters sx={{ backgroundColor: "#ffd7d7" }}>
                 <Box display="flex" sx={{ position: "sticky" }}>
-                    <img src={Logo} width="200px" />
+                    <img src={Logo} width="200px" alt="Logo" />
                 </Box>
             </Toolbar>
             <Divider />
@@ -81,7 +89,9 @@ function Leftbar(props) {
                     <ListItem key={index} disablePadding>
                         <ListItemButton>
                             <ListItemIcon>{entry.icon}</ListItemIcon>
-                            <ListItemText primary={entry.name} />
+                            <Link to={entry.to} sx={{ textDecoration: "none" }}>
+                                <ListItemText primary={entry.name} />
+                            </Link>
                         </ListItemButton>
                     </ListItem>
                 ))}

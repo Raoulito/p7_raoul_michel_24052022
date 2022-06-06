@@ -115,7 +115,7 @@ const Topbar = () => {
                         onClose={handleCloseUserMenu}
                     >
                         {settings.map((setting) => (
-                            <Link to={setting.to} style={{ textDecoration: "none", color: "#4e5166" }}>
+                            <Link key={setting.to} to={setting.to} style={{ textDecoration: "none", color: "#4e5166" }}>
                                 <Typography textAlign="center">
                                     <MenuItem key={setting.label} onClick={handleCloseUserMenu}>
                                         {setting.label}

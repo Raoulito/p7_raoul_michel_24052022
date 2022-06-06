@@ -5,8 +5,12 @@ import { BrowserRouter } from 'react-router-dom'
 import { ThemeProvider } from "@mui/material/styles"
 import { theme } from "./theme"
 
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
+
+
+    root.render( 
+
     <BrowserRouter>
         <ThemeProvider theme={theme}>
             <App />
