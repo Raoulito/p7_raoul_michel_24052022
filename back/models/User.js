@@ -41,8 +41,7 @@ const UserSchema = new mongoose.Schema(
             type: Boolean,
             default: false,
         },
-        isCE:
-        {
+        isCE: {
             type: Boolean,
             default: false,
         },
@@ -61,6 +60,10 @@ const UserSchema = new mongoose.Schema(
         relationship: {
             type: Number,
             enum: [1, 2, 3],
+        },
+        dateBirth: {
+            type: Date,
+            default: null,
         },
     },
     { timestamps: true }

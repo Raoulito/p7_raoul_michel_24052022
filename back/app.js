@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const app = express();
 const path = require("path");
 const mongoose = require("mongoose");
@@ -44,6 +45,7 @@ app.use("/api/posts", require("./routes/posts"));
 
 app.use(helmet());
 app.use(morgan("common"));
+app.use(cors());
 
 
 

@@ -36,17 +36,17 @@ export default function Account() {
     return (
         <>
         <Card sx={{backgroundColor:"#4e5166", display:"flex", flexDirection:"column", alignItems:"center", borderRadius:"15px"}}>
-            <Card sx={{ width: "50%", backgroundColor: "lightgrey", borderRadius: "15px", display: "flex", flexDirection: "row", my: "15px" }}>
+            <Card sx={{ width: "70%", backgroundColor: "lightgrey", borderRadius: "15px", display: "flex", flexDirection: "row", my: "15px" }}>
                 <CardContent sx={{ display: "flex", textAlign: "center", justifyContent: "center" }}>Mettez à jour vos informations personnelles ici, Raoul.</CardContent>
                 </Card>
 
-            <Card sx={{ width:"50%",  borderRadius: "15px", mb: "15px", p:"15px"}}>
+            <Card sx={{ width:"70%", borderRadius: "15px", mb: "15px", p:"15px"}}>
             <TextField type="text" label="Votre ville d'origine :" color="secondary" focused variant="filled" sx={{ width: "100%" }} />
             </Card>
-            <Card sx={{ width: "50%", borderRadius: "15px", mb: "15px", p:"15px" }}>
+            <Card sx={{ width: "70%", borderRadius: "15px", mb: "15px", p:"15px" }}>
             <TextField type="text" label="Votre ville actuelle :" color="secondary" focused variant="filled" sx={{ width: "100%" }} />
             </Card>
-            <Card sx={{ width: "50%", borderRadius: "15px", mb: "15px", p:"15px" }}>
+            <Card sx={{ width: "70%", borderRadius: "15px", mb: "15px", p:"15px" }}>
                 
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <Stack spacing={3}>
@@ -65,7 +65,7 @@ export default function Account() {
                     </Stack>
                 </LocalizationProvider>
             </Card>
-            <Card sx={{ width: "50%", borderRadius: "15px", mb: "15px", display: "flex", flexDirection: "row", p:"15px" }}>
+            <Card sx={{ width: "70%", borderRadius: "15px", mb: "15px", display: "flex", flexDirection: "row", p:"15px" }}>
                 <Box
                     component="form"
                     sx={{
@@ -74,7 +74,7 @@ export default function Account() {
                     noValidate
                     autoComplete="off"
                 >
-                    <Card sx={{ borderRadius: "15px", mb: "15px" }}>
+                    <Card sx={{ mb: "15px" }}>
                         <TextField id="outlined-select-currency" select label="Choisissez" value={marStatus} onChange={handleChange} helperText="Indiquez votre statut marital" >
                             {maritalStatus.map((option) => (
                                 <MenuItem key={option.value} value={option.value}>
@@ -85,13 +85,13 @@ export default function Account() {
                     </Card>
                 </Box>
             </Card>
-            <Card sx={{ width: "50%", borderRadius: "15px", mb: "15px", p:"15px" }}>
+            <Card sx={{ width: "70%", borderRadius: "15px", mb: "15px", p:"15px" }}>
                 Ajoutez une photo de profil :{" "}
                 <Button size="small" style={{ color: "#4e5166", borderRadius: "15px", backgroundColor: "#ffd7d7", height: "50px" }}>
                     <AddPhotoAlternateIcon />
                 </Button>
             </Card>
-            <Card sx={{ width: "50%", borderRadius: "15px", mb: "15px", p:"15px" }}>
+            <Card sx={{ width: "70%", borderRadius: "15px", mb: "15px", p:"15px" }}>
                 Ajoutez une photo de couverture :{" "}
                 <Button size="small" style={{ color: "#4e5166", borderRadius: "15px", backgroundColor: "#ffd7d7", height: "50px"}}>
                     <AddPhotoAlternateIcon />
