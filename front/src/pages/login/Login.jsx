@@ -9,5 +9,7 @@ export const Login = () => {
         navigate("/");
     };
 
-    return <LoginForm onSubmit={onSubmit} />;
+    return (
+    <LoginForm onSubmit={onSubmit} />
+    );
 };

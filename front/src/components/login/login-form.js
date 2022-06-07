@@ -17,28 +17,31 @@ export const LoginForm = ({ onSubmit }) => {
     };
 
     return (
-        <><Box sx={{display:"flex", justifyItems:"center"}}>
-            <form>
-            <Box>
-                    <img src={Logo} width="300px" alt="Logo Groupomania" />
-                </Box>
-                <Card sx={{  backgroundColor: "lightgrey", borderRadius: "15px", display: "flex", flexDirection: "row", mb: "15px" }}>
-                    <CardContent sx={{ display: "flex", textAlign: "center", justifyContent: "center" }}>Connectez-vous ici avec votre email et votre mot de passe.</CardContent>
-                </Card>
+        <>
+            <Box sx={{ display: "flex", justifyItems: "center" }}>
+                <form>
+                    <Box>
+                        <img src={Logo} width="300px" alt="Logo Groupomania" />
+                    </Box>
+                    <Card sx={{ backgroundColor: "lightgrey", borderRadius: "15px", display: "flex", flexDirection: "row", mb: "15px" }}>
+                        <CardContent sx={{ display: "flex", textAlign: "center", justifyContent: "center" }}>Connectez-vous ici avec votre email et votre mot de passe.</CardContent>
+                    </Card>
 
-                <Card sx={{ backgroundColor: "lightgrey", borderRadius: "15px", mb: "15px" }}>
-                    <TextField type="email" label="Email" color="secondary" focused variant="filled" sx={{ width: "100%" }} onChange={(e) => setEmail(e.target.value)} />
-                </Card>
+                    <Card sx={{ backgroundColor: "lightgrey", borderRadius: "15px", mb: "15px" }}>
+                        <TextField type="email" label="Email" color="secondary" focused variant="filled" sx={{ width: "100%" }} onChange={(e) => setEmail(e.target.value)} />
+                    </Card>
 
-                <Card sx={{  backgroundColor: "lightgrey", borderRadius: "15px", mb: "15px" }}>
-                    <TextField type="password" label="Mot de passe" color="secondary" focused variant="filled" sx={{ width: "100%" }} onChange={(e) => setPwd(e.target.value)} />
-                </Card>
+                    <Card sx={{ backgroundColor: "lightgrey", borderRadius: "15px", mb: "15px" }}>
+                        <TextField type="password" label="Mot de passe" color="secondary" focused variant="filled" sx={{ width: "100%" }} onChange={(e) => setPwd(e.target.value)} />
+                    </Card>
 
-                <Button variant="contained" onClick={submit}>Me connecter</Button>
-            <div>
-                <Link to="/register">Pas de compte ? Enregistrez vous ici.</Link>
-            </div>
-            </form>
+                    <Button variant="contained" onClick={submit}>
+                        Me connecter
+                    </Button>
+                    <div>
+                        <Link to="/register">Pas de compte ? Enregistrez vous ici.</Link>
+                    </div>
+                </form>
             </Box>
         </>
     );
