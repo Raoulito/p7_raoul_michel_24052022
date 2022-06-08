@@ -14,7 +14,7 @@ export default function Register() {
     const email = useRef();
     const passwordConfirm = useRef();
     const navigate = useNavigate();
-
+    
     const handleClick = async (e) => {
         e.preventDefault();
         if (passwordConfirm.current.value !== password.current.value) {
@@ -26,9 +26,10 @@ export default function Register() {
                 password: password.current.value,
             };
             try {
-                await axios.post("auth/register", user);
-                navigate.push("/login");
+                axios.post("http://localhost:27017/auth/register", user);
+                navigate("/login");
             } catch (err) {
+                alert('Quelque chose s\'est mal passé');
                 console.log(err);
             }
         }
