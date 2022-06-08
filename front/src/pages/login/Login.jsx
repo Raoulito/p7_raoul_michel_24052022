@@ -3,8 +3,8 @@ import { LoginForm } from "../../components/login/login-form";
 
 export const Login = () => {
     const navigate = useNavigate();
-    const onSubmit = (email, pwd) => {
-        //API call res
+    const onSubmit = (email, password) => {
+        //ICI LA !!!
         localStorage.setItem("isLogged", 'LOGGEDIN')
         navigate("/");
     };

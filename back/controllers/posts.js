@@ -6,11 +6,11 @@ exports.createPost = async (req, res) => {
     const newPost = new Post(req.body);
     try {
         const post = await newPost.save();
-        res.status(201).json(savedPost);
+        res.status(201).json(newPost);
     } catch (err) {
         res.status(500).json(err);
     }
-}
+};
 
 //Update a post
 exports.updatePost = async (req, res) => {
@@ -25,13 +25,13 @@ exports.updatePost = async (req, res) => {
     } catch (err) {
         res.status(500).json(err);
     }
-}
+};
 
 //Delete a post
 exports.deletePost = async (req, res) => {
     try {
         const post = await Post.findById(req.params.id);
-        if (post.userId === req.body.userId){
+        if (post.userId === req.body.userId) {
             await post.deleteOne();
             res.status(200).json("The post has been deleted");
         } else {
@@ -40,7 +40,7 @@ exports.deletePost = async (req, res) => {
     } catch (err) {
         res.status(500).json(err);
     }
-}
+};
 
 //Get user's all posts
 exports.getPosts = async (req, res) => {
@@ -50,7 +50,7 @@ exports.getPosts = async (req, res) => {
     } catch (error) {
         res.status(500).json({ error });
     }
-}
+};
 
 //Get timeline posts
 exports.getPostsById = async (req, res) => {
@@ -66,7 +66,7 @@ exports.getPostsById = async (req, res) => {
     } catch (error) {
         res.status(500).json({ error });
     }
-}
+};
 
 //get a post
 exports.getPost = async (req, res) => {
@@ -76,7 +76,7 @@ exports.getPost = async (req, res) => {
     } catch (error) {
         res.status(500).json({ error });
     }
-}
+};
 
 //(dis)like a post
 exports.likePost = async (req, res) => {
@@ -92,5 +92,4 @@ exports.likePost = async (req, res) => {
     } catch (err) {
         res.status(500).json(err);
     }
-}
-
+};

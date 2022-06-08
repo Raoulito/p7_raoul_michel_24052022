@@ -21,8 +21,6 @@ export const LoginForm = ({ onSubmit }) => {
         }
     };
 
-
-
     return (
         <>
             <Box sx={{ display: "flex", justifyItems: "center" }}>

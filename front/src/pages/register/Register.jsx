@@ -15,13 +15,13 @@ export default function Register() {
     const password = useRef();
     const passwordConfirm = useRef();
     const navigate = useNavigate();
-    
+
     const handleClick = async (e) => {
         e.preventDefault();
         if (passwordConfirm.current.value !== password.current.value) {
             passwordConfirm.current.setCustomValidity("Les mots de passe ne correspondent pas");
         } else {
-            const user = { 
+            const user = {
                 username: username.current.value,
                 password: password.current.value,
                 email: email.current.value,
@@ -31,12 +31,11 @@ export default function Register() {
                 await axios.post("http://localhost:27017/api/auth/register", user);
                 navigate("/login");
             } catch (err) {
-                alert('Quelque chose s\'est mal passé');
+                alert("Quelque chose s'est mal passé");
                 console.log(err);
             }
         }
     };
-
 
     return (
         <>
@@ -70,4 +69,4 @@ export default function Register() {
             </form>
         </>
     );
-}   
+}
