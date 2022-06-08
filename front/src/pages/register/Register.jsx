@@ -7,11 +7,12 @@ import Logo from "../../assets/logos/icon-left-font.png";
 import axios from "axios";
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import React from "react";
 
 export default function Register() {
     const username = useRef();
-    const password = useRef();
     const email = useRef();
+    const password = useRef();
     const passwordConfirm = useRef();
     const navigate = useNavigate();
     
@@ -20,13 +21,14 @@ export default function Register() {
         if (passwordConfirm.current.value !== password.current.value) {
             passwordConfirm.current.setCustomValidity("Les mots de passe ne correspondent pas");
         } else {
-            const user = {
+            const user = { 
                 username: username.current.value,
-                email: email.current.value,
                 password: password.current.value,
+                email: email.current.value,
             };
+            console.log(user);
             try {
-                axios.post("http://localhost:27017/auth/register", user);
+                await axios.post("http://localhost:27017/api/auth/register", user);
                 navigate("/login");
             } catch (err) {
                 alert('Quelque chose s\'est mal passé');
@@ -34,6 +36,7 @@ export default function Register() {
             }
         }
     };
+
 
     return (
         <>
@@ -46,19 +49,19 @@ export default function Register() {
                 </Card>
 
                 <Card sx={{ maxWidth: "50%", backgroundColor: "lightgrey", borderRadius: "15px", mb: "15px" }}>
-                    <TextField type="text" required ref={username} label="Votre nom :" color="secondary" focused variant="filled" sx={{ width: "100%" }} />
+                    <TextField type="text" required inputRef={username} label="Votre nom :" color="secondary" focused variant="filled" sx={{ width: "100%" }} />
                 </Card>
 
                 <Card sx={{ maxWidth: "50%", backgroundColor: "lightgrey", borderRadius: "15px", mb: "15px" }}>
-                    <TextField type="email" required ref={email} label="Votre email :" color="secondary" focused variant="filled" sx={{ width: "100%" }} />
+                    <TextField type="email" required inputRef={email} label="Votre email :" color="secondary" focused variant="filled" sx={{ width: "100%" }} />
                 </Card>
 
                 <Card sx={{ maxWidth: "50%", backgroundColor: "lightgrey", borderRadius: "15px", mb: "15px" }}>
-                    <TextField type="password" minLength="6" required ref={password} label="Mot de passe :" color="secondary" focused variant="filled" sx={{ width: "100%" }} />
+                    <TextField type="password" minLength="6" required inputRef={password} label="Mot de passe :" color="secondary" focused variant="filled" sx={{ width: "100%" }} />
                 </Card>
 
                 <Card sx={{ maxWidth: "50%", backgroundColor: "lightgrey", borderRadius: "15px", mb: "15px" }}>
-                    <TextField type="password" required ref={passwordConfirm} label="Confirmez le mot de passe :" color="secondary" focused variant="filled" sx={{ width: "100%" }} />
+                    <TextField type="password" required inputRef={passwordConfirm} label="Confirmez le mot de passe :" color="secondary" focused variant="filled" sx={{ width: "100%" }} />
                 </Card>
 
                 <Button variant="contained" onClick={handleClick}>
@@ -67,4 +70,4 @@ export default function Register() {
             </form>
         </>
     );
-}
+}   

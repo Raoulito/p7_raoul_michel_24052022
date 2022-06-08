@@ -6,15 +6,22 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import axios from "axios";
 
 export const LoginForm = ({ onSubmit }) => {
     const [email, setEmail] = useState("");
-    const [pwd, setPwd] = useState("");
-    const submit = (e) => {
+    const [password, setPassword] = useState("");
+    const submit = async (e) => {
         e.preventDefault();
-        onSubmit(email, pwd);
-        console.log(email, pwd);
+        try {
+            const res = await axios.post("http://localhost:27017/api/auth/login", { email, password });
+            onSubmit(res.data);
+        } catch (error) {
+            console.log(error);
+        }
     };
+
+
 
     return (
         <>
@@ -32,7 +39,7 @@ export const LoginForm = ({ onSubmit }) => {
                     </Card>
 
                     <Card sx={{ backgroundColor: "lightgrey", borderRadius: "15px", mb: "15px" }}>
-                        <TextField type="password" label="Mot de passe" color="secondary" focused variant="filled" sx={{ width: "100%" }} onChange={(e) => setPwd(e.target.value)} />
+                        <TextField type="password" label="Mot de passe" color="secondary" focused variant="filled" sx={{ width: "100%" }} onChange={(e) => setPassword(e.target.value)} />
                     </Card>
 
                     <Button variant="contained" onClick={submit}>
