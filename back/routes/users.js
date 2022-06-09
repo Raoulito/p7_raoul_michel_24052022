@@ -3,11 +3,11 @@ const express = require("express");
 const router = express.Router();
 const auth = require("../middleware/auth");
 
-router.get("/", auth, userCtrl.getAUser);
-router.get("/friends/:userId", auth, userCtrl.getFriends);
-router.put(":/id/follow", auth, userCtrl.followUser);
-router.put(":/id/unfollow", auth, userCtrl.unfollowUser);
-router.put(":/id", auth, userCtrl.updateUser);
-router.delete(":/id", auth, userCtrl.deleteUser);
+router.get("/:id", userCtrl.getAUser);
+router.get("/friends/:userId", userCtrl.getFriends);
+router.put("/:id/follow", userCtrl.followUser);
+router.put("/:id/unfollow", userCtrl.unfollowUser);
+router.put("/:id", userCtrl.updateUser);
+router.delete("/:id", userCtrl.deleteUser);
 
 module.exports = router;

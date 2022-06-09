@@ -39,12 +39,11 @@ exports.deleteUser = async (req, res) => {
 
 //Get a user
 exports.getAUser = async (req, res) => {
-    const userId = req.query.userId;
-    const username = req.query.username;
+    const id = req.query.id;
     try {
-        const user = userId ? await User.findById(userId) : await User.findOne({ username: username });
+        const user = await User.findById(id);
         const { password, updatedAt, ...other } = user._doc;
-        res.status(200).json(other);
+        res.status(200).json(user._doc);
     } catch (err) {
         res.status(500).json(err);
     }
@@ -79,7 +78,7 @@ exports.followUser = async (req, res) => {
             if (!user.followers.includes(req.body.userId)) {
                 await user.updateOne({ $push: { followers: req.body.userId } });
                 await currentUser.updateOne({ $push: { followings: req.params.id } });
-                res.status(200).json("user has been followed");
+                res.status(200).json("User has been followed");
             } else {
                 res.status(403).json("You already follow this user");
             }

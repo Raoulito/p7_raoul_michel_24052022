@@ -1,7 +1,7 @@
 const Post = require("../models/Post");
 const User = require("../models/User");
 
-//Create a post
+//Create a post - OK postman
 exports.createPost = async (req, res) => {
     const newPost = new Post(req.body);
     try {
@@ -12,7 +12,7 @@ exports.createPost = async (req, res) => {
     }
 };
 
-//Update a post
+//Update a post - OK Postman
 exports.updatePost = async (req, res) => {
     try {
         const post = await Post.findById(req.params.id);
@@ -27,7 +27,7 @@ exports.updatePost = async (req, res) => {
     }
 };
 
-//Delete a post
+//Delete a post - OK postman
 exports.deletePost = async (req, res) => {
     try {
         const post = await Post.findById(req.params.id);
@@ -68,7 +68,10 @@ exports.getPostsById = async (req, res) => {
     }
 };
 
-//get a post
+
+
+
+//get a post - OK postman
 exports.getPost = async (req, res) => {
     try {
         const post = await Post.findById(req.params.id);

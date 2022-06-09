@@ -9,13 +9,24 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import ShareIcon from "@mui/icons-material/Share";
 import CommentIcon from "@mui/icons-material/Comment";
-import { useState } from "react";
-import { Users } from "../../dummyData";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 export default function Post({ post }) {
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
     const [like, setLike] = useState(post.like);
     const [isLiked, setIsLiked] = useState(false);
+    const [user, setUser] = useState({});
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            const res = await axios.get(`http://localhost:27017/api/users/${post.userId}`);
+            setUser(res.data);
+            console.log("ICI", res.data);
+        };
+        fetchUser();
+    }, []);
+
     const likeHandler = () => {
         setLike(isLiked ? like - 1 : like + 1);
         setIsLiked(!isLiked);
@@ -24,8 +35,8 @@ export default function Post({ post }) {
     return (
         <Card sx={{ maxWidth: "100%", mt: "10px", backgroundColor: "lightgrey", borderRadius: "15px" }}>
             <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
-                {/* NEEDS FIX */} <Avatar sx={{ m: "5px" }} src={Users.filter((u) => u.id === post.userId)[0].profilePicture} />
-                {Users.filter((u) => u.id === post.userId)[0].username}, {post.date}
+                <Avatar sx={{ m: "5px" }} src={user.profilePicture} />
+                {user.username}, {post.date}.
             </Box>
             <CardContent>
                 <Typography variant="body2" color="text.secondary">
