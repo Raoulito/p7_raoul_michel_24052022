@@ -68,9 +68,6 @@ exports.getPostsById = async (req, res) => {
     }
 };
 
-
-
-
 //get a post - OK postman
 exports.getPost = async (req, res) => {
     try {

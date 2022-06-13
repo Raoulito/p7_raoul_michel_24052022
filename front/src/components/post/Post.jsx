@@ -11,10 +11,15 @@ import ShareIcon from "@mui/icons-material/Share";
 import CommentIcon from "@mui/icons-material/Comment";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import TimeAgo from 'timeago-react';
+import * as timeago from 'timeago.js';
+import fr from 'timeago.js/lib/lang/fr';
+timeago.register('fr', fr);
+
 
 export default function Post({ post }) {
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-    const [like, setLike] = useState(post.like);
+    const [like, setLike] = useState(post.likes.length);
     const [isLiked, setIsLiked] = useState(false);
     const [user, setUser] = useState({});
 
@@ -36,7 +41,7 @@ export default function Post({ post }) {
         <Card sx={{ maxWidth: "100%", mt: "10px", backgroundColor: "lightgrey", borderRadius: "15px" }}>
             <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
                 <Avatar sx={{ m: "5px" }} src={user.profilePicture} />
-                {user.username}, {post.date}.
+                {user.username}, <TimeAgo datetime={post.createdAt} locale='fr' />.
             </Box>
             <CardContent>
                 <Typography variant="body2" color="text.secondary">
@@ -44,7 +49,7 @@ export default function Post({ post }) {
                 </Typography>
             </CardContent>
             <Box sx={{ px: "15px" }}>
-                {/* NEEDS FIX */} <CardMedia sx={{ width: "100%", borderRadius: "15px" }} component="img" alt="" height="240" src={PF+post.photo} />
+                {/* NEEDS FIX */} <CardMedia sx={{ width: "100%", borderRadius: "15px" }} component="img" alt="" height="240" src={PF+post.img} />
             </Box>
             <Box sx={{ px: "15px", display: "flex", justifyContent: "flex-start", my: "10px" }}>
                 <CardMedia sx={{ mr: "15px", width: "25px", borderRadius: "50%", cursor: "pointer" }} component="img" alt="Like" height="25" src={`${PF}/reactions/like.png`} onClick={likeHandler} />

@@ -37,17 +37,15 @@ exports.deleteUser = async (req, res) => {
     }
 };
 
-//Get a user
+//Get a user by userId - OK postman
 exports.getAUser = async (req, res) => {
-    const id = req.query.id;
     try {
-        const user = await User.findById(id);
-        const { password, updatedAt, ...other } = user._doc;
-        res.status(200).json(user._doc);
-    } catch (err) {
-        res.status(500).json(err);
+        const user = await User.findById(req.params.id);
+        res.status(200).json(user);
+    } catch (error) {
+        res.status(500).json({ error });
     }
-};
+}
 
 //Get friends
 exports.getFriends = async (req, res) => {
