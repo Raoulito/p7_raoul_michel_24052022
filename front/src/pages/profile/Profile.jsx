@@ -105,7 +105,7 @@ Voir tous vos amis
     </Card>
 
     </Card>
-    <Feed/>
+    <Feed userId="62a077f93714d9ab83a32701"/>
         </>
     );
 }

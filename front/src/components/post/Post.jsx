@@ -9,6 +9,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import ShareIcon from "@mui/icons-material/Share";
 import CommentIcon from "@mui/icons-material/Comment";
+import {Link} from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import TimeAgo from 'timeago-react';
@@ -27,10 +28,10 @@ export default function Post({ post }) {
         const fetchUser = async () => {
             const res = await axios.get(`http://localhost:27017/api/users/${post.userId}`);
             setUser(res.data);
-            console.log("ICI", res.data);
+
         };
         fetchUser();
-    }, []);
+    }, [post.userId]);
 
     const likeHandler = () => {
         setLike(isLiked ? like - 1 : like + 1);
@@ -40,7 +41,9 @@ export default function Post({ post }) {
     return (
         <Card sx={{ maxWidth: "100%", mt: "10px", backgroundColor: "lightgrey", borderRadius: "15px" }}>
             <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
+                <Link to={`/profile/${user._id}`}>
                 <Avatar sx={{ m: "5px" }} src={user.profilePicture} />
+                </Link>
                 {user.username}, <TimeAgo datetime={post.createdAt} locale='fr' />.
             </Box>
             <CardContent>

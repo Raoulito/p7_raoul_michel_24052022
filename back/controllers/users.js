@@ -50,7 +50,7 @@ exports.getAUser = async (req, res) => {
 //Get friends
 exports.getFriends = async (req, res) => {
     try {
-        const user = await User.findById(req.params.userId);
+        const user = await User.findById(req.params.id);
         const friends = await Promise.all(
             user.followings.map((friendId) => {
                 return User.findById(friendId);

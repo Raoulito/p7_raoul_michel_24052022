@@ -1,7 +1,7 @@
 const Post = require("../models/Post");
 const User = require("../models/User");
 
-//Create a post - OK postman
+//Create a post
 exports.createPost = async (req, res) => {
     const newPost = new Post(req.body);
     try {
@@ -12,7 +12,7 @@ exports.createPost = async (req, res) => {
     }
 };
 
-//Update a post - OK Postman
+//Update a post
 exports.updatePost = async (req, res) => {
     try {
         const post = await Post.findById(req.params.id);
@@ -27,7 +27,7 @@ exports.updatePost = async (req, res) => {
     }
 };
 
-//Delete a post - OK postman
+//Delete a post
 exports.deletePost = async (req, res) => {
     try {
         const post = await Post.findById(req.params.id);
@@ -45,7 +45,8 @@ exports.deletePost = async (req, res) => {
 //Get user's all posts
 exports.getPosts = async (req, res) => {
     try {
-        const posts = await Post.find({ userId: req.userId });
+        const user = await User.findById(req.params.id);
+        const posts = await Post.find({ userId: user._id });
         res.status(200).json({ posts });
     } catch (error) {
         res.status(500).json({ error });
@@ -55,7 +56,7 @@ exports.getPosts = async (req, res) => {
 //Get timeline posts
 exports.getPostsById = async (req, res) => {
     try {
-        const currentUser = await User.findById(req.params.userId);
+        const currentUser = await User.findById(req.params.id);
         const userPosts = await Post.find({ userId: currentUser._id });
         const friendPosts = await Promise.all(
             currentUser.followings.map((friendId) => {
@@ -68,7 +69,7 @@ exports.getPostsById = async (req, res) => {
     }
 };
 
-//get a post - OK postman
+//get a post
 exports.getPost = async (req, res) => {
     try {
         const post = await Post.findById(req.params.id);
