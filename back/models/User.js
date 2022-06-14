@@ -48,14 +48,17 @@ const UserSchema = new mongoose.Schema(
         desc: {
             type: String,
             max: 50,
+            default: "Éditez votre bio via la page Mon compte",
         },
         city: {
             type: String,
             max: 50,
+            default: "Ajoutez votre ville actuelle via la page Mon compte",
         },
         from: {
             type: String,
             max: 50,
+            default: "Ajoutez votre ville d'origine via la page Mon compte",
         },
         relationship: {
             type: Number,
