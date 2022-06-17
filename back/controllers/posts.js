@@ -59,7 +59,7 @@ exports.getPostsById = async (req, res) => {
         const currentUser = await User.findById(req.params.id);
         const userPosts = await Post.find({ userId: currentUser._id });
         const friendPosts = await Promise.all(
-            currentUser.followings.map((friendId) => {
+            currentUser.followings.reverse().map((friendId) => {
                 return Post.find({ userId: friendId });
             })
         );

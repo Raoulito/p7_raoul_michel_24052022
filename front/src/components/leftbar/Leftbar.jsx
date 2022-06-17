@@ -10,7 +10,6 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import Logo from "../../assets/logos/icon-left-font-monochrome-black.png";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Topbar from "../topbar/Topbar";
@@ -80,7 +79,7 @@ function Leftbar(props) {
         <div>
             <Toolbar disableGutters sx={{ backgroundColor: "#ffd7d7" }}>
                 <Box display="flex" sx={{ position: "sticky" }}>
-                    <img src={Logo} width="200px" alt="Logo" />
+                    <img src="http://localhost:27017/images/assets/logos/icon-left-font-monochrome-black.png" width="200px" alt="Logo" />
                 </Box>
             </Toolbar>
             <Divider />

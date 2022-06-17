@@ -2,10 +2,9 @@ import { Route, Routes } from "react-router-dom";
 import Home from "../pages/home/Home";
 import Profile from "../pages/profile/Profile";
 import Account from "../pages/account/Account";
-import {Login} from "../pages/login/Login";
+import { Login } from "../pages/login/Login";
 import Register from "../pages/register/Register";
 import Logout from "../pages/logout/Logout";
-
 
 export const GroupoManiaRoutes = () => {
     return (

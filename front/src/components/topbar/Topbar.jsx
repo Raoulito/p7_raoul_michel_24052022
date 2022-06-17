@@ -8,7 +8,6 @@ import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import PhotoProfil from "../../assets/person/1.jpeg";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MessageIcon from "@mui/icons-material/Message";
 import Badge from "@mui/material/Badge";
@@ -95,7 +94,7 @@ const Topbar = () => {
                 <Box sx={{ flexGrow: 0 }}>
                     <Tooltip title="Voir le menu">
                         <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                            <Avatar alt="Raoul MICHEL" src={PhotoProfil} />
+                            <Avatar alt="Raoul MICHEL" src="" />
                         </IconButton>
                     </Tooltip>
                     <Menu

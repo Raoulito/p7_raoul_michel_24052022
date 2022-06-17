@@ -46,7 +46,7 @@ exports.getAUser = async (req, res) => {
     } catch (error) {
         res.status(500).json({ error });
     }
-}
+};
 
 //Get friends
 exports.getFriends = async (req, res) => {
@@ -108,5 +108,4 @@ exports.unfollowUser = async (req, res) => {
     } else {
         res.status(403).json("You can't unfollow yourself");
     }
-}
-
+};

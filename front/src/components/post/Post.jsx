@@ -19,7 +19,6 @@ timeago.register('fr', fr);
 
 
 export default function Post({ post }) {
-    const PF = process.env.REACT_APP_PUBLIC_FOLDER;
     const [like, setLike] = useState(post.likes.length);
     const [isLiked, setIsLiked] = useState(false);
     const [user, setUser] = useState({});
@@ -64,9 +63,11 @@ export default function Post({ post }) {
                 {like} personne(s) aime(nt) ça.
             </Box>
             <CardContent>
+                {post.comment && (
                 <Typography variant="body2" color="text.secondary">
                     {post.comment} commentaire(s).
                 </Typography>
+                )}
             </CardContent>
             <CardActions>
                 <Button size="small" style={{ color: "#4e5166", borderRadius: "15px", backgroundColor: "#ffd7d7", height: "50px", alt: "Partager" }}>

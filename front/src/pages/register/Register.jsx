@@ -3,7 +3,6 @@ import CardContent from "@mui/material/CardContent";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
-import Logo from "../../assets/logos/icon-left-font.png";
 import axios from "axios";
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
@@ -41,7 +40,7 @@ export default function Register() {
         <>
             <form>
                 <Box display="flex" sx={{ position: "sticky" }}>
-                    <img src={Logo} width="300px" alt="Logo Groupomania" />
+                    <img src="http://localhost:27017/images/assets/logos/icon-left-font.png" width="300px" alt="Logo Groupomania" />
                 </Box>
                 <Card sx={{ maxWidth: "50%", backgroundColor: "lightgrey", borderRadius: "15px", display: "flex", flexDirection: "row", mb: "15px" }}>
                     <CardContent sx={{ display: "flex", textAlign: "center", justifyContent: "center" }}>Créez votre compte simplement. Votre nom, un email et un mot de passe suffisent !</CardContent>

@@ -10,7 +10,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router";
 
-export default function Profile({id}) {
+export default function Profile({ id }) {
     const [user, setUser] = useState({});
     const params = useParams();
     console.log(params);
