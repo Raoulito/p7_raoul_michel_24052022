@@ -99,7 +99,7 @@ function Leftbar(props) {
 
             <CardContent sx={{ backgroundColor: "#ffd7d7" }}>
                 <Typography sx={{ fontSize: 18, fontWeight: "bold" }} color="text.secondary" gutterBottom>
-                    Vos amis
+                    Amis en ligne
                 </Typography>
             </CardContent>
             {Users.map((u) => (

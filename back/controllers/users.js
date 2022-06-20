@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 
 //update user
 exports.updateUser = async (req, res) => {
-    if (req.body.id === req.params.id || req.body.isAdmin) {
+    if (req.body.userId === req.params.id || req.body.isAdmin) {
         if (req.body.password) {
             try {
                 const salt = await bcrypt.genSalt(12);
@@ -25,7 +25,7 @@ exports.updateUser = async (req, res) => {
 
 //Delete user
 exports.deleteUser = async (req, res) => {
-    if (req.body.id === req.params.id || req.body.isAdmin) {
+    if (req.body.userId === req.params.id || req.body.isAdmin) {
         try {
             const user = await User.findByIdAndDelete(req.params.id);
             res.status(200).json("Account deleted");
@@ -39,7 +39,6 @@ exports.deleteUser = async (req, res) => {
 
 //Get a user by userId - OK postman
 exports.getAUser = async (req, res) => {
-    const id = req.query.id;
     try {
         const user = await User.findById(req.params.id);
         res.status(200).json(user);

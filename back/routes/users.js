@@ -5,9 +5,9 @@ const auth = require("../middleware/auth");
 
 router.get("/:id", userCtrl.getAUser); //ok
 router.get("/friends/:id", userCtrl.getFriends);//ok
-router.put("/:id/follow", userCtrl.followUser);//pas ok
-router.put("/:id/unfollow", userCtrl.unfollowUser);//pas ok
-router.put("/:id", userCtrl.updateUser);//ok
-router.delete("/:id", userCtrl.deleteUser);//ok
+router.put("/:id/follow", userCtrl.followUser);
+router.put("/:id/unfollow", userCtrl.unfollowUser);
+router.put("/:id", userCtrl.updateUser);
+router.delete("/:id", userCtrl.deleteUser);
 
 module.exports = router;

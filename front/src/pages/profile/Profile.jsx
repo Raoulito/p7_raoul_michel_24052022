@@ -1,70 +1,118 @@
 import React from "react";
 import Feed from "../../components/feed/Feed";
 import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Avatar from "@mui/material/Avatar";
-import Box from "@mui/material/Box";
-import { useState, useEffect } from "react";
-import axios from "axios";
-import { useParams } from "react-router";
+import { styled } from '@mui/material/styles';
+import Collapse from '@mui/material/Collapse';
+import IconButton from '@mui/material/IconButton';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Box from '@mui/material/Box';
+import { Users } from "../../dummyData";
+import Online from "../../components/online/Online";
 
+<<<<<<< HEAD
 export default function Profile({ id }) {
     const [user, setUser] = useState({});
     const params = useParams();
     console.log(params);
+=======
+const ExpandMore = styled((props) => {
+  const { expand, ...other } = props;
+  return <IconButton {...other} />;
+})(({ theme, expand }) => ({
+  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+  marginLeft: 'auto',
+  transition: theme.transitions.create('transform', {
+    duration: theme.transitions.duration.shortest,
+  }),
+}));
+>>>>>>> parent of e8cb2d3 (Added some conditional rendering on profile + few other minor fixes)
 
-    useEffect(() => {
-        const fetchUser = async () => {
-            const res = await axios.get(`http://localhost:27017/api/users/62a05e663714d9ab83a326ec`);
-            setUser(res.data);
-        };
-        fetchUser();
-    }, []);
 
+export default function Profile() {
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+
+  const [expanded, setExpanded] = React.useState(false);
+  
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
     return (
-        <>
-            <Card sx={{ maxWidth: "100%", backgroundColor: "lightgrey", borderRadius: "15px", display: "flex", flexDirection: "column" }}>
-                <CardMedia component="img" height="280" src={user.coverPicture || "http://localhost:27017/images/assets/logos/icon-left-font.png"} alt="Photo de couverture" sx={{ borderRadius: "15px" }} />
-                <CardContent sx={{ display: "flex", pl: "50px" }}>
-                    <Avatar alt="Photo de profil" src={user.profilePicture} sx={{ width: 180, height: 180, zIndex: "1", mt: "-200px" }} />
-                </CardContent>
-                <Typography variant="body2" color="text.secondary" sx={{ fontWeight: "bold", fontSize: "2.5em", mt: "-40px", pl: "100px" }}>
-                    {user.username}
-                </Typography>
-                <Typography variant="h5" component="div" sx={{ fontWeight: "300", ml: "40px" }}>
-                    {user.desc}
-                </Typography>
-            </Card>
+      <>
+        <Card sx={{ maxWidth: "100%", backgroundColor: "lightgrey", borderRadius: "15px", display: "flex", flexDirection: "column" }}>
+            <CardMedia component="img" height="280" src={`${PF}post/sandwich.jpeg`} alt="Photo de couverture" sx={{borderRadius:"15px"}}/>
+            <CardContent sx={{ display: "flex", pl:"50px" }} >
+                <Avatar alt="Photo de profil" src={`${PF}person/1.jpeg`} sx={{ width: 180, height: 180, zIndex:"1", mt:"-200px" }} />
+            </CardContent>
+            <Typography variant="body2" color="text.secondary" sx={{ fontWeight: "bold", fontSize: "2.5em", mt: "-40px", pl:"100px" }}>
+                Username
+            </Typography>
+            <Typography variant="h5" component="div" sx={{ fontWeight: "300", ml:"40px" }}>
+              Bio
+         </Typography>
+        </Card>
 
-            <Card sx={{ minWidth: 275, borderRadius: "15px", my: "10px", display: "flex", flexDirection: "row" }}>
-                <CardContent>
-                    {user.from && (
-                        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                            De {user.from}
-                        </Typography>
-                    )}
-                    {user.city && (
-                        <Typography variant="h5" component="div">
-                            Habite à {user.city}
-                        </Typography>
-                    )}
-                    {user.dateBirth && (
-                        <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                            Né le {user.dateBirth}.
-                        </Typography>
-                    )}
-                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                        {user.relationship === 1 ? "Célibataire" : user.relationship === 2 ? "En couple" : user.relationship === 3 ? "Je le garde pour moi" : "-"}.
-                    </Typography>
-                    <Typography variant="body2">{user.followers} ami((e)s).</Typography>
-                    <Typography variant="body2">{user.followings} abonnement(s).</Typography>
-                </CardContent>
+        <Card sx={{ minWidth: 275, borderRadius: "15px", my:"10px", display:"flex", flexDirection:"row" }}>
+      <CardContent>
+        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+          De Le Puy-en-Velay
+        </Typography>
+        <Typography variant="h5" component="div">
+          Habite à Tirana
+        </Typography>
+        <Typography sx={{ mb: 1.5 }} color="text.secondary">
+          Né le 28/04/1981, 41 ans.
+        </Typography>
+        <Typography sx={{ mb: 1.5 }} color="text.secondary">
+          En couple.
+        </Typography>
+        <Typography variant="body2">
+          10 ami((e)s), 5 en ligne.
+        </Typography>
+        <Typography variant="body2">
+          14 abonnement(s).
+        </Typography>
+      </CardContent>
 
-                <Box flexGrow={1} />
-            </Card>
-            <Feed userId="62a077f93714d9ab83a32701" />
+<Box flexGrow={1}/>
+
+    <Card sx={{ maxWidth: 240 }}>
+
+
+    <CardActions>
+Voir tous vos amis
+        <ExpandMore
+          expand={expanded}
+          onClick={handleExpandClick}
+          aria-expanded={expanded}
+          aria-label="show more"
+        >
+          <ExpandMoreIcon />
+        </ExpandMore>
+      </CardActions>
+      <Collapse in={expanded} timeout="auto" unmountOnExit>
+        <CardContent>
+
+
+        <Typography paragraph>
+          
+        {Users.map((u) => (
+            <Online key={u.id} user={u} />
+          ))}
+          
+        </Typography>
+
+ 
+        </CardContent>
+      </Collapse>
+    </Card>
+
+    </Card>
+    <Feed userId="62a077f93714d9ab83a32701"/>
         </>
     );
 }

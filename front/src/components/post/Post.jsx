@@ -50,16 +50,12 @@ export default function Post({ post }) {
                     {post?.desc}
                 </Typography>
             </CardContent>
-          
-            {post.img && (
-                <Box sx={{ px: "15px" }}>
-                    <CardMedia sx={{ width: "100%", borderRadius: "15px" }} component="img" alt="" height="240" src={post.img} />
-                </Box>
-            )}
-
+            <Box sx={{ px: "15px" }}>
+                {/* NEEDS FIX */} <CardMedia sx={{ width: "100%", borderRadius: "15px" }} component="img" alt="" height="240" src={PF+post.img} />
+            </Box>
             <Box sx={{ px: "15px", display: "flex", justifyContent: "flex-start", my: "10px" }}>
-                <CardMedia sx={{ mr: "15px", width: "25px", borderRadius: "50%", cursor: "pointer" }} component="img" alt="Like" height="25" src="http://localhost:27017/images/assets/reactions/like.png" onClick={likeHandler} />
-                <CardMedia sx={{ mr: "15px", width: "25px", borderRadius: "50%", cursor: "pointer" }} component="img" alt="Love" height="25" src="http://localhost:27017/images/assets/reactions/heart.png" onClick={likeHandler} />
+                <CardMedia sx={{ mr: "15px", width: "25px", borderRadius: "50%", cursor: "pointer" }} component="img" alt="Like" height="25" src={`${PF}/reactions/like.png`} onClick={likeHandler} />
+                <CardMedia sx={{ mr: "15px", width: "25px", borderRadius: "50%", cursor: "pointer" }} component="img" alt="Love" height="25" src={`${PF}/reactions/heart.png`} onClick={likeHandler} />
                 {like} personne(s) aime(nt) ça.
             </Box>
             <CardContent>
