@@ -10,11 +10,6 @@ const MIME_TYPES = {
   "video/mp4": "mp4",
   "video/avi": "avi",
     "video/mpeg": "mpeg",
-
-    "video/x-msvideo": "x-msvideo",
-    "video/x-flv": "flv",
-    "video/x-ms-wmv": "x-ms-wmv",
-
 };
 
 // Configure multer - creates a storage object

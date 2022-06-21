@@ -19,14 +19,6 @@ import { Link } from "react-router-dom";
 
 const settings = [
     {
-        label: "Profil",
-        to: "/profile",
-    },
-    {
-        label: "Mon compte",
-        to: "/account",
-    },
-    {
         label: "Déconnexion",
         to: "/logout",
     },
@@ -61,7 +53,7 @@ const Topbar = () => {
         <Container maxWidth="xl">
             <Toolbar disableGutters sx={{ backgroundColor: "primary" }}>
                 <Box flexGrow={1} />
-                <StyledTextField
+                {/* <StyledTextField
                     sx={{ display: "flex", height: "45px", justifyContent: "center", width: "100%", margin: "10px" }}
                     placeholder="Que recherchez-vous ?"
                     InputProps={{
@@ -72,11 +64,11 @@ const Topbar = () => {
                             </InputAdornment>
                         ),
                     }}
-                />
+                /> */}
 
                 <Box sx={{ flexGrow: 1 }} />
 
-                <MenuItem>
+                {/* <MenuItem>
                     <IconButton size="large" aria-label="Vous avez 4 messages" color="inherit">
                         <Badge badgeContent={4} color="error">
                             <MessageIcon />
@@ -89,12 +81,12 @@ const Topbar = () => {
                             <NotificationsIcon />
                         </Badge>
                     </IconButton>
-                </MenuItem>
+                </MenuItem> */}
 
                 <Box sx={{ flexGrow: 0 }}>
                     <Tooltip title="Voir le menu">
                         <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                            <Avatar alt="Raoul MICHEL" src="" />
+                            <Avatar alt="" src="" />
                         </IconButton>
                     </Tooltip>
                     <Menu

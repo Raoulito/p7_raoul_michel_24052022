@@ -3,7 +3,9 @@ const router = express.Router();
 const postCtrl = require("../controllers/posts");
 const auth = require("../middleware/auth");
 
-router.get("/profile/:id", postCtrl.getPosts);
+router.get("/", postCtrl.getAllPosts);
+
+router.get("/profile", postCtrl.getPosts);
 router.get("/timeline/:id", postCtrl.getPostsById);
 router.get("/:id", postCtrl.getPost); 
 router.post("/", postCtrl.createPost);

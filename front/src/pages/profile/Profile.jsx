@@ -6,35 +6,14 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Avatar from "@mui/material/Avatar";
-import { styled } from '@mui/material/styles';
 import Collapse from '@mui/material/Collapse';
-import IconButton from '@mui/material/IconButton';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Box from '@mui/material/Box';
-import { Users } from "../../dummyData";
 import Online from "../../components/online/Online";
 
-<<<<<<< HEAD
-export default function Profile({ id }) {
-    const [user, setUser] = useState({});
-    const params = useParams();
-    console.log(params);
-=======
-const ExpandMore = styled((props) => {
-  const { expand, ...other } = props;
-  return <IconButton {...other} />;
-})(({ theme, expand }) => ({
-  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-  marginLeft: 'auto',
-  transition: theme.transitions.create('transform', {
-    duration: theme.transitions.duration.shortest,
-  }),
-}));
->>>>>>> parent of e8cb2d3 (Added some conditional rendering on profile + few other minor fixes)
 
 
 export default function Profile() {
-  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
   const [expanded, setExpanded] = React.useState(false);
   
@@ -44,9 +23,9 @@ export default function Profile() {
     return (
       <>
         <Card sx={{ maxWidth: "100%", backgroundColor: "lightgrey", borderRadius: "15px", display: "flex", flexDirection: "column" }}>
-            <CardMedia component="img" height="280" src={`${PF}post/sandwich.jpeg`} alt="Photo de couverture" sx={{borderRadius:"15px"}}/>
+            <CardMedia component="img" height="280" src="" alt="Photo de couverture" sx={{borderRadius:"15px"}}/>
             <CardContent sx={{ display: "flex", pl:"50px" }} >
-                <Avatar alt="Photo de profil" src={`${PF}person/1.jpeg`} sx={{ width: 180, height: 180, zIndex:"1", mt:"-200px" }} />
+                <Avatar alt="Photo de profil" src="" sx={{ width: 180, height: 180, zIndex:"1", mt:"-200px" }} />
             </CardContent>
             <Typography variant="body2" color="text.secondary" sx={{ fontWeight: "bold", fontSize: "2.5em", mt: "-40px", pl:"100px" }}>
                 Username
@@ -80,39 +59,9 @@ export default function Profile() {
 
 <Box flexGrow={1}/>
 
-    <Card sx={{ maxWidth: 240 }}>
-
-
-    <CardActions>
-Voir tous vos amis
-        <ExpandMore
-          expand={expanded}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon />
-        </ExpandMore>
-      </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-
-
-        <Typography paragraph>
-          
-        {Users.map((u) => (
-            <Online key={u.id} user={u} />
-          ))}
-          
-        </Typography>
-
- 
-        </CardContent>
-      </Collapse>
-    </Card>
 
     </Card>
-    <Feed userId="62a077f93714d9ab83a32701"/>
+    <Feed />
         </>
     );
 }

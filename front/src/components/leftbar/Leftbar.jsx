@@ -24,7 +24,6 @@ import Online from "../online/Online";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { GroupoManiaRoutes } from "../../router/routes";
-import { Users } from "../../dummyData";
 import Link from "@mui/material/Link";
 
 const drawerWidth = 240;
@@ -97,14 +96,6 @@ function Leftbar(props) {
             </List>
             <Divider />
 
-            <CardContent sx={{ backgroundColor: "#ffd7d7" }}>
-                <Typography sx={{ fontSize: 18, fontWeight: "bold" }} color="text.secondary" gutterBottom>
-                    Amis en ligne
-                </Typography>
-            </CardContent>
-            {Users.map((u) => (
-                <Online key={u.id} user={u} />
-            ))}
         </div>
     );
 
