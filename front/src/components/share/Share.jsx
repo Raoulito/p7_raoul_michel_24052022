@@ -10,6 +10,7 @@ import Input from "@mui/material/Input";
 import axios from "axios";
 import { useState } from "react";
 import { Web3Storage } from "web3.storage";
+import dotenv from "dotenv";
 
 const StyledTextField = styled(TextField)({
     backgroundColor: "#fff",
@@ -26,14 +27,17 @@ const StyledTextField = styled(TextField)({
     },
 });
 
-const apiToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDAzZjZjMWZDZDQwQTkxYzRiYTIzZjg4ODI4RDc3YUJmNjg3RTIzY2UiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NTU5NjU0NTkzOTMsIm5hbWUiOiJncm91cG8ifQ.eBcxFoBMnhDdHbe8AQg2ALpXLGtIJcbgFhOM2Dkhc_w";
+const apiToken = process.env.WEB3_STORAGE_API_TOKEN;
 const client = new Web3Storage({ token: apiToken });
 
 export default function Share() {
     const [file, setFile] = useState("");
+    const [desc, setDesc] = useState("");
     const handleUpload = async () => {
         console.log(document.getElementById("input").files[0]);
         let fileInput = document.getElementById("input");
+
+        console.log(fileInput)
 
         const rootCid = await client.put(fileInput.files, {
             name: "",
@@ -52,8 +56,8 @@ export default function Share() {
         try {
             const res = await axios.post("http://localhost:27017/api/posts", {
                 userId: localStorage.getItem("isLogged"),
-                desc: document.getElementById("desc").value,
-                //img: {file},
+                desc: desc,
+                img: "https://" + rootCid + ".ipfs.dweb.link/" + files[0].name,
             });
             console.log("RES",res);
         } catch (err) {
@@ -66,13 +70,14 @@ export default function Share() {
     return (
         <>
             <Card sx={{ maxWidth: "100%", backgroundColor: "lightgrey", display: "flex", borderRadius: "15px" }}>
-                <StyledTextField type="text" id="desc" sx={{ display: "flex", height: "50px", width: "100%", margin: "10px" }} placeholder="Quoi de neuf ?" />
+                <StyledTextField type="text" id="desc" sx={{ display: "flex", height: "50px", width: "100%", margin: "10px" }} placeholder="Quoi de neuf ?" onChange={(e) => setDesc(e.target.value)}/>
 
                 <CardActions>
                     <>
                         <label htmlFor="input">
                             <Input accept="image/*" id="input" type="file" name="file" style={{ display: "none" }} />
-                            <Button size="small" style={{ color: "#4e5166", borderRadius: "15px", backgroundColor: "#ffd7d7", height: "50px", marginRight: "10px" }} aria-label="Télécharger une image" component="span" >
+                            <Button size="small" style={{ color: "#4e5166", borderRadius: "15px", backgroundColor: "#ffd7d7",
+                             height: "50px", marginRight: "10px" }} aria-label="Télécharger une image" component="span" >
                                 <AddPhotoAlternateIcon />
                             </Button>
                         </label>

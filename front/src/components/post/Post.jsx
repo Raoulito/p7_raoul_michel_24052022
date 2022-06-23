@@ -52,7 +52,7 @@ export default function Post({ post }) {
 
             {post.img && (
                 <Box sx={{ px: "15px" }}>
-                    <CardMedia sx={{ width: "100%", borderRadius: "15px" }} component="img" alt="" height="240" src={post.img} />
+                    <CardMedia sx={{ width: "100%", borderRadius: "15px" }} component="img" alt="" height="240" src={URL.srcObject = post.img } />
                 </Box>
             )}
             <Box sx={{ px: "15px", display: "flex", justifyContent: "flex-start", my: "10px" }}>
