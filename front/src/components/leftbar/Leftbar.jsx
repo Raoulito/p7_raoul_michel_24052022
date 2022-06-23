@@ -20,9 +20,6 @@ import DynamicFeedIcon from "@mui/icons-material/DynamicFeed";
 import MessageIcon from "@mui/icons-material/Message";
 import OndemandVideoIcon from "@mui/icons-material/OndemandVideo";
 import GroupsIcon from "@mui/icons-material/Groups";
-import Online from "../online/Online";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
 import { GroupoManiaRoutes } from "../../router/routes";
 import Link from "@mui/material/Link";
 

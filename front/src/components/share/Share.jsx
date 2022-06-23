@@ -26,7 +26,7 @@ const StyledTextField = styled(TextField)({
     },
 });
 
-const apiToken = process.env.WEB3_STORAGE_API_TOKEN;
+const apiToken = process.env.REACT_APP_WEB3_STORAGE_API_TOKEN;
 const client = new Web3Storage({ token: apiToken });
 
 export default function Share() {
