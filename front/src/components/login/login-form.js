@@ -17,6 +17,7 @@ export const LoginForm = ({ onSubmit }) => {
             const res = await axios.post("http://localhost:27017/api/auth/login", { email, password });
             onSubmit(res.data);
             localStorage.setItem("isLogged", (res.data.userId))
+            localStorage.setItem("isAdmin", (res.data.isAdmin)) 
         } catch (error) {
             console.log(error);
         }
