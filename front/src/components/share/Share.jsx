@@ -10,7 +10,6 @@ import Input from "@mui/material/Input";
 import axios from "axios";
 import { useState } from "react";
 import { Web3Storage } from "web3.storage";
-import dotenv from "dotenv";
 
 const StyledTextField = styled(TextField)({
     backgroundColor: "#fff",
@@ -37,20 +36,20 @@ export default function Share() {
         console.log(document.getElementById("input").files[0]);
         let fileInput = document.getElementById("input");
 
-        console.log(fileInput)
+        console.log(fileInput);
 
         const rootCid = await client.put(fileInput.files, {
             name: "",
             maxRetries: 3,
         });
 
-        console.log("CID",rootCid);
+        console.log("CID", rootCid);
 
         const res = await client.get(rootCid);
         const files = await res.files();
         console.log(files);
         const url = URL.createObjectURL(files[0]);
-        console.log("URL",url);
+        console.log("URL", url);
         setFile(url);
 
         try {
@@ -59,7 +58,7 @@ export default function Share() {
                 desc: desc,
                 img: "https://" + rootCid + ".ipfs.dweb.link/" + files[0].name,
             });
-            console.log("RES",res);
+            console.log("RES", res);
         } catch (err) {
             console.log(err);
         } finally {
@@ -70,14 +69,13 @@ export default function Share() {
     return (
         <>
             <Card sx={{ maxWidth: "100%", backgroundColor: "lightgrey", display: "flex", borderRadius: "15px" }}>
-                <StyledTextField type="text" id="desc" sx={{ display: "flex", height: "50px", width: "100%", margin: "10px" }} placeholder="Quoi de neuf ?" onChange={(e) => setDesc(e.target.value)}/>
+                <StyledTextField type="text" id="desc" sx={{ display: "flex", height: "50px", width: "100%", margin: "10px" }} placeholder="Quoi de neuf ?" onChange={(e) => setDesc(e.target.value)} />
 
                 <CardActions>
                     <>
                         <label htmlFor="input">
                             <Input accept="image/*" id="input" type="file" name="file" style={{ display: "none" }} />
-                            <Button size="small" style={{ color: "#4e5166", borderRadius: "15px", backgroundColor: "#ffd7d7",
-                             height: "50px", marginRight: "10px" }} aria-label="Télécharger une image" component="span" >
+                            <Button size="small" style={{ color: "#4e5166", borderRadius: "15px", backgroundColor: "#ffd7d7", height: "50px", marginRight: "10px" }} aria-label="Télécharger une image" component="span">
                                 <AddPhotoAlternateIcon />
                             </Button>
                         </label>
