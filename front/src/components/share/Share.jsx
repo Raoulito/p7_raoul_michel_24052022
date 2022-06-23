@@ -6,7 +6,6 @@ import styled from "@emotion/styled";
 import TextField from "@mui/material/TextField";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import IosShareIcon from "@mui/icons-material/IosShare";
-import IconButton from "@mui/material/IconButton";
 import Input from "@mui/material/Input";
 import axios from "axios";
 import { useState } from "react";
@@ -34,31 +33,29 @@ export default function Share() {
     const [file, setFile] = useState("");
     const handleUpload = async () => {
         console.log(document.getElementById("input").files[0]);
-        var fileInput = document.getElementById("input");
+        let fileInput = document.getElementById("input");
 
         const rootCid = await client.put(fileInput.files, {
             name: "",
             maxRetries: 3,
         });
 
-        console.log(rootCid);
+        console.log("CID",rootCid);
 
         const res = await client.get(rootCid);
         const files = await res.files();
         console.log(files);
         const url = URL.createObjectURL(files[0]);
-        console.log(url);
+        console.log("URL",url);
         setFile(url);
-    };
 
-    const createPost = async (post) => {
         try {
             const res = await axios.post("http://localhost:27017/api/posts", {
                 userId: localStorage.getItem("isLogged"),
                 desc: document.getElementById("desc").value,
-                //img: `https://dweb.link/ipfs/${rootCid}`,
+                //img: {file},
             });
-            console.log(res);
+            console.log("RES",res);
         } catch (err) {
             console.log(err);
         } finally {
@@ -73,14 +70,14 @@ export default function Share() {
 
                 <CardActions>
                     <>
-                        <label htmlFor="icon-button-file">
-                            <Input accept="image/*" id="icon-button-file" type="file" name="file" style={{ display: "none" }} />
-                            <Button size="small" style={{ color: "#4e5166", borderRadius: "15px", backgroundColor: "#ffd7d7", height: "50px", marginRight: "10px" }} aria-label="upload picture" component="span" onClick={handleUpload}>
+                        <label htmlFor="input">
+                            <Input accept="image/*" id="input" type="file" name="file" style={{ display: "none" }} />
+                            <Button size="small" style={{ color: "#4e5166", borderRadius: "15px", backgroundColor: "#ffd7d7", height: "50px", marginRight: "10px" }} aria-label="Télécharger une image" component="span" >
                                 <AddPhotoAlternateIcon />
                             </Button>
                         </label>
                     </>
-                    <Button size="small" style={{ color: "#4e5166", borderRadius: "15px", backgroundColor: "#ffd7d7", height: "50px" }} onClick={createPost}>
+                    <Button size="small" style={{ color: "#4e5166", borderRadius: "15px", backgroundColor: "#ffd7d7", height: "50px" }} onClick={handleUpload}>
                         <IosShareIcon />
                     </Button>
                 </CardActions>
