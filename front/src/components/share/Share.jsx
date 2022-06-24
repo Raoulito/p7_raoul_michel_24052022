@@ -33,32 +33,24 @@ export default function Share() {
     const [file, setFile] = useState("");
     const [desc, setDesc] = useState("");
     const handleUpload = async () => {
-        console.log(document.getElementById("input").files[0]);
         let fileInput = document.getElementById("input");
-
-        console.log(fileInput);
 
         const rootCid = await client.put(fileInput.files, {
             name: "",
             maxRetries: 3,
         });
 
-        console.log("CID", rootCid);
-
         const res = await client.get(rootCid);
         const files = await res.files();
-        console.log(files);
         const url = URL.createObjectURL(files[0]);
-        console.log("URL", url);
         setFile(url);
 
         try {
-            const res = await axios.post("http://localhost:27017/api/posts", {
+            let res = await axios.post("http://localhost:27017/api/posts", {
                 userId: localStorage.getItem("isLogged"),
                 desc: desc,
-                img: "https://" + rootCid + ".ipfs.dweb.link/" + files[0].name,
+                img:"https://" + rootCid + ".ipfs.dweb.link/" + files[0].name,
             });
-            console.log("RES", res);
         } catch (err) {
             console.log(err);
         } finally {
