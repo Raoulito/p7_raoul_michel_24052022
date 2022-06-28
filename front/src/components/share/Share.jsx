@@ -30,7 +30,7 @@ const apiToken = process.env.REACT_APP_WEB3_STORAGE_API_TOKEN;
 const client = new Web3Storage({ token: apiToken });
 
 export default function Share() {
-    const [img, setImg] = useState("");
+    const [file, setFile] = useState("");
     const [desc, setDesc] = useState("");
     const handleUpload = async () => {
         let fileInput = document.getElementById("input");
@@ -38,11 +38,11 @@ export default function Share() {
             name: "",
             maxRetries: 3,
         });
-        console.log(img)
+        console.log(file)
         const res = await client.get(rootCid);
         const files = await res.files();
         const url = URL.createObjectURL(files[0]);
-        setImg(url);
+        setFile(url);
 
         try {
             
@@ -68,7 +68,7 @@ export default function Share() {
                     <>
                         <label htmlFor="input">
                             <Input accept="image/*" id="input" type="file" name="img" style={{ display: "none" }} />
-                            <Button size="small" style={{ color: "#4e5166", borderRadius: "15px", backgroundColor: "#ffd7d7", height: "50px", marginRight: "10px" }} aria-label="Télécharger une image" component="span" onChange={(e) => setImg(e.target.value)}>
+                            <Button size="small" style={{ color: "#4e5166", borderRadius: "15px", backgroundColor: "#ffd7d7", height: "50px", marginRight: "10px" }} aria-label="Télécharger une image" component="span" onChange={(e) => setFile(e.target.value)}>
                                 <AddPhotoAlternateIcon />
                             </Button>
                         </label>
