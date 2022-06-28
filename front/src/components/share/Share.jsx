@@ -30,27 +30,28 @@ const apiToken = process.env.REACT_APP_WEB3_STORAGE_API_TOKEN;
 const client = new Web3Storage({ token: apiToken });
 
 export default function Share() {
-    const [file, setFile] = useState("");
+    const [img, setImg] = useState("");
     const [desc, setDesc] = useState("");
     const handleUpload = async () => {
         let fileInput = document.getElementById("input");
-
         const rootCid = await client.put(fileInput.files, {
             name: "",
             maxRetries: 3,
         });
-
+        console.log(img)
         const res = await client.get(rootCid);
         const files = await res.files();
         const url = URL.createObjectURL(files[0]);
-        setFile(url);
+        setImg(url);
 
         try {
+            
             let res = await axios.post("http://localhost:27017/api/posts", {
                 userId: localStorage.getItem("isLogged"),
                 desc: desc,
                 img:"https://" + rootCid + ".ipfs.dweb.link/" + files[0].name,
             });
+            console.log(res)
         } catch (err) {
             console.log(err);
         } finally {
@@ -66,8 +67,8 @@ export default function Share() {
                 <CardActions>
                     <>
                         <label htmlFor="input">
-                            <Input accept="image/*" id="input" type="file" name="file" style={{ display: "none" }} />
-                            <Button size="small" style={{ color: "#4e5166", borderRadius: "15px", backgroundColor: "#ffd7d7", height: "50px", marginRight: "10px" }} aria-label="Télécharger une image" component="span">
+                            <Input accept="image/*" id="input" type="file" name="img" style={{ display: "none" }} />
+                            <Button size="small" style={{ color: "#4e5166", borderRadius: "15px", backgroundColor: "#ffd7d7", height: "50px", marginRight: "10px" }} aria-label="Télécharger une image" component="span" onChange={(e) => setImg(e.target.value)}>
                                 <AddPhotoAlternateIcon />
                             </Button>
                         </label>

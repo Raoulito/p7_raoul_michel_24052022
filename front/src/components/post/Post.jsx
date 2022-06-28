@@ -7,6 +7,12 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import ButtonGroup from "@mui/material/ButtonGroup";
+import Input from "@mui/material/Input";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+import Modal from "@mui/material/Modal";
+import TextField from "@mui/material/TextField";
+import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import TimeAgo from "timeago-react";
@@ -18,6 +24,12 @@ export default function Post({ post }) {
     const [like, setLike] = useState(post.likes.length);
     const [isLiked, setIsLiked] = useState(false);
     const [user, setUser] = useState({});
+    const [desc, setDesc] = useState(post.desc);
+    const [file, setFile] = useState(post.img);
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -34,12 +46,27 @@ export default function Post({ post }) {
 
     const deletePost = async () => {
         try {
-            let res = await axios.delete(`http://localhost:27017/api/posts/${post._id}`,             
-            {
+            let res = await axios.delete(`http://localhost:27017/api/posts/${post._id}`, {
                 data: {
+                    userId: localStorage.getItem("isLogged"),
+                    isAdmin: localStorage.getItem("isAdmin"),
+                },
+            });
+            console.log(res);
+        } catch (error) {
+            console.log(error);
+        } finally {
+            window.location.reload();
+        }
+    };
+
+    const updatePost = async () => {
+        try {
+            let res = await axios.put(`http://localhost:27017/api/posts/${post._id}`, {
                 userId: localStorage.getItem("isLogged"),
                 isAdmin: localStorage.getItem("isAdmin"),
-                }
+                desc: desc,
+                img: file,
             });
             console.log(res);
         } catch (error) {
@@ -50,8 +77,6 @@ export default function Post({ post }) {
     };
 
 
-
-
     if (post.userId === localStorage.getItem("isLogged") || localStorage.getItem("isAdmin") === "true") {
         return (
             <Card sx={{ maxWidth: "100%", mt: "10px", backgroundColor: "lightgrey", borderRadius: "15px" }}>
@@ -59,9 +84,39 @@ export default function Post({ post }) {
                     <Avatar sx={{ m: "5px" }} src={user.profilePicture} />
                     {user.username}, <TimeAgo datetime={post.createdAt} locale="fr" />.
                     <Box flexGrow={1} />
-                    <ButtonGroup disableElevation variant="contained" sx={{ marginRight: "15px" }}>
-                        <Button>Éditer</Button>
-                        <Button onClick={() => deletePost(post._id)}>Supprimer</Button>
+                    <ButtonGroup disableElevation variant="contained" sx={{ marginRight: "10px" }}>
+                        <div>
+                            <Button onClick={handleOpen} style={{ color: "#4e5166", marginRight:"15px" }}>
+                                <EditIcon />
+                            </Button>
+                            <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description" >
+                                <Box sx={{ position:"absolute", top:"50%", left:"50%", transform:"translate(-50%, -50%)", width:"75%", height:"300px", background:"white", borderRadius:"15px"}}>
+                                    <Typography id="modal-modal-title" variant="h6" component="h2" sx={{marginLeft:"10px"}}>
+                                        Éditez votre post !
+                                    </Typography>
+                                    <TextField type="text" id="desc" sx={{ display: "flex", height: "50px", width: "90%", margin: "10px" }} placeholder={post.desc} onChange={(e) => setDesc(e.target.value)} />
+                                    <Typography id="modal-modal-title" variant="h6" component="h2" sx={{marginLeft:"10px"}}>
+                                        Ajoutez une nouvelle image !
+                                        <label htmlFor="input">
+                            <Input accept="image/*" id="input" type="file" name="img" style={{ display: "none" }} />
+                            <Button size="small" style={{ color: "#4e5166", borderRadius: "15px", backgroundColor: "#ffd7d7", height: "50px", marginRight: "10px" }} aria-label="Télécharger une image" component="span" onChange={(e) => setFile(e.target.value)}>
+                                <AddPhotoAlternateIcon />
+                            </Button>
+                        </label>
+                                    </Typography>
+                                    <Typography id="modal-modal-title" variant="h6" component="h2" sx={{marginLeft:"10px"}}>
+
+                                    Et validez ici !
+                                    </Typography>
+                                    <Button onClick={() => updatePost(post._id)} style={{ color: "#4e5166", marginLeft:"10px" }}>
+                                        <EditIcon />
+                                    </Button>
+                                </Box>
+                            </Modal>
+                        </div>
+                        <Button onClick={() => deletePost(post._id)} style={{ color: "#4e5166" }}>
+                            <DeleteIcon />
+                        </Button>
                     </ButtonGroup>
                 </Box>
                 <CardContent>
@@ -72,7 +127,7 @@ export default function Post({ post }) {
 
                 {post.img && (
                     <Box sx={{ px: "15px" }}>
-                        <CardMedia sx={{ width: "100%", borderRadius: "15px" }} component="img" alt="" height="240" src={(URL.srcObject = post.img)} />
+                        <CardMedia sx={{ width: "100%", borderRadius: "15px" }} component="img" alt="" height="" src={(URL.srcObject = post.img)} />
                     </Box>
                 )}
                 <Box sx={{ px: "15px", display: "flex", justifyContent: "flex-start", my: "10px" }}>
@@ -105,7 +160,7 @@ export default function Post({ post }) {
 
                 {post.img && (
                     <Box sx={{ px: "15px" }}>
-                        <CardMedia sx={{ width: "100%", borderRadius: "15px" }} component="img" alt="" height="240" src={(URL.srcObject = post.img)} />
+                        <CardMedia sx={{ width: "100%", borderRadius: "15px" }} component="img" alt="" height="" src={(URL.srcObject = post.img)} />
                     </Box>
                 )}
                 <Box sx={{ px: "15px", display: "flex", justifyContent: "flex-start", my: "10px" }}>
