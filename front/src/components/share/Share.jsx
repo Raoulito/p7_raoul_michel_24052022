@@ -32,12 +32,30 @@ const client = new Web3Storage({ token: apiToken });
 export default function Share() {
     const [file, setFile] = useState("");
     const [desc, setDesc] = useState("");
+
     const handleUpload = async () => {
         let fileInput = document.getElementById("input");
+
+        if (fileInput.files === null || fileInput.files.length === 0) {
+            try {
+                let res = await axios.post(`http://localhost:27017/api/posts`, {
+                    userId: localStorage.getItem("isLogged"),
+                    desc: desc,
+                    img: "",
+            });
+            console.log(res);
+        } catch (err) {
+            console.log(err);
+        } finally {
+            window.location.reload();
+        }
+        } else {
+
         const rootCid = await client.put(fileInput.files, {
             name: "",
             maxRetries: 3,
         });
+    
         console.log(file)
         const res = await client.get(rootCid);
         const files = await res.files();
@@ -57,7 +75,8 @@ export default function Share() {
         } finally {
             window.location.reload();
         }
-    };
+    }
+}
 
     return (
         <>
