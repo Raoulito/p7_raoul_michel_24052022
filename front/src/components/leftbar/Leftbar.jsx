@@ -5,23 +5,11 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Topbar from "../topbar/Topbar";
-import SchoolIcon from "@mui/icons-material/School";
-import BeachAccessIcon from "@mui/icons-material/BeachAccess";
-import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
-import DynamicFeedIcon from "@mui/icons-material/DynamicFeed";
-import MessageIcon from "@mui/icons-material/Message";
-import OndemandVideoIcon from "@mui/icons-material/OndemandVideo";
-import GroupsIcon from "@mui/icons-material/Groups";
+import { Link } from "react-router-dom";
 import { GroupoManiaRoutes } from "../../router/routes";
-import Link from "@mui/material/Link";
 
 const drawerWidth = 240;
 
@@ -29,43 +17,43 @@ function Leftbar(props) {
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
 
-    const menuLeftUp = [
-        {
-            name: "Fil d'actualités",
-            icon: <DynamicFeedIcon />,
-            to: "/",
-        },
-        {
-            name: "Messagerie",
-            icon: <MessageIcon />,
-            to: "/chat",
-        },
-        {
-            name: "Vidéos",
-            icon: <OndemandVideoIcon />,
-            to: "/videos",
-        },
-        {
-            name: "Vos groupes",
-            icon: <GroupsIcon />,
-            to: "/groups",
-        },
-        {
-            name: "Formations",
-            icon: <SchoolIcon />,
-            to: "/school",
-        },
-        {
-            name: "Comité d'entreprise",
-            icon: <BeachAccessIcon />,
-            to: "/holidays",
-        },
-        {
-            name: "Foire aux questions",
-            icon: <HelpOutlineIcon />,
-            to: "/faq",
-        },
-    ];
+    // const menuLeftUp = [
+    //     {
+    //         name: "Fil d'actualités",
+    //         icon: <DynamicFeedIcon />,
+    //         to: "/",
+    //     },
+    //     {
+    //         name: "Messagerie",
+    //         icon: <MessageIcon />,
+    //         to: "/chat",
+    //     },
+    //     {
+    //         name: "Vidéos",
+    //         icon: <OndemandVideoIcon />,
+    //         to: "/videos",
+    //     },
+    //     {
+    //         name: "Vos groupes",
+    //         icon: <GroupsIcon />,
+    //         to: "/groups",
+    //     },
+    //     {
+    //         name: "Formations",
+    //         icon: <SchoolIcon />,
+    //         to: "/school",
+    //     },
+    //     {
+    //         name: "Comité d'entreprise",
+    //         icon: <BeachAccessIcon />,
+    //         to: "/holidays",
+    //     },
+    //     {
+    //         name: "Foire aux questions",
+    //         icon: <HelpOutlineIcon />,
+    //         to: "/faq",
+    //     },
+    // ];
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
@@ -75,11 +63,13 @@ function Leftbar(props) {
         <div>
             <Toolbar disableGutters sx={{ backgroundColor: "#ffd7d7" }}>
                 <Box display="flex" sx={{ position: "sticky" }}>
+                    <Link to="/">
                     <img src="http://localhost:27017/images/assets/logos/icon-left-font-monochrome-black.png" width="200px" alt="Logo" />
+                    </Link>
                 </Box>
             </Toolbar>
             <Divider />
-            <List sx={{ backgroundColor: "#4e5166", color: "#fff" }}>
+            {/* <List sx={{ backgroundColor: "#4e5166", color: "#fff" }}>
                 {menuLeftUp.map((entry, index) => (
                     <ListItem key={index} disablePadding>
                         <ListItemButton>
@@ -91,7 +81,7 @@ function Leftbar(props) {
                     </ListItem>
                 ))}
             </List>
-            <Divider />
+            <Divider /> */}
 
         </div>
     );

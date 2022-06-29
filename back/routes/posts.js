@@ -5,11 +5,11 @@ const auth = require("../middleware/auth");
 
 router.get("/", postCtrl.getAllPosts);
 
-router.get("/profile", postCtrl.getPosts);
-router.get("/timeline/:id", postCtrl.getPostsById);
-router.get("/:id", postCtrl.getPost); 
-router.post("/", postCtrl.createPost);
-router.put("/:id/like", postCtrl.likePost);
+router.get("/profile", auth, postCtrl.getPosts);
+router.get("/timeline/:id", auth, postCtrl.getPostsById);
+router.get("/:id", auth, postCtrl.getPost); 
+router.post("/",  postCtrl.createPost);
+router.put("/:id/like", auth, postCtrl.likePost);
 router.put("/:id", postCtrl.updatePost);
 router.delete("/:id", postCtrl.deletePost); 
 

@@ -13,6 +13,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
+import { Web3Storage } from "web3.storage";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import TimeAgo from "timeago-react";
@@ -29,7 +30,6 @@ export default function Post({ post }) {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -60,22 +60,48 @@ export default function Post({ post }) {
         }
     };
 
+    const apiToken = process.env.REACT_APP_WEB3_STORAGE_API_TOKEN;
+    const client = new Web3Storage({ token: apiToken });
     const updatePost = async () => {
-        try {
-            let res = await axios.put(`http://localhost:27017/api/posts/${post._id}`, {
-                userId: localStorage.getItem("isLogged"),
-                isAdmin: localStorage.getItem("isAdmin"),
-                desc: desc,
-                img: file,
+        let fileInput = document.getElementById("input");
+        if (fileInput === null || fileInput.files === null || fileInput.files.length === 0) {
+            try {
+                let res = await axios.put(`http://localhost:27017/api/posts/${post._id}`, {
+                    userId: localStorage.getItem("isLogged"),
+                    desc: desc,
+                    img: file,
+                });
+                console.log(res);
+            } catch (err) {
+                console.log(err);
+            } finally {
+                window.location.reload();
+            }
+        } else {
+            const rootCid = await client.put(fileInput.files, {
+                name: "",
+                maxRetries: 3,
             });
-            console.log(res);
-        } catch (error) {
-            console.log(error);
-        } finally {
-            window.location.reload();
+            const res = await client.get(rootCid);
+            const files = await res.files();
+            const url = URL.createObjectURL(files[0]);
+            setFile(url);
+
+            try {
+                let res = await axios.put(`http://localhost:27017/api/posts/${post._id}`, {
+                    userId: localStorage.getItem("isLogged"),
+                    isAdmin: localStorage.getItem("isAdmin"),
+                    desc: desc,
+                    img: "https://" + rootCid + ".ipfs.dweb.link/" + files[0].name,
+                });
+                console.log(res);
+            } catch (error) {
+                console.log(error);
+            } finally {
+                window.location.reload();
+            }
         }
     };
-
 
     if (post.userId === localStorage.getItem("isLogged") || localStorage.getItem("isAdmin") === "true") {
         return (
@@ -86,31 +112,34 @@ export default function Post({ post }) {
                     <Box flexGrow={1} />
                     <ButtonGroup disableElevation variant="contained" sx={{ marginRight: "10px" }}>
                         <div>
-                            <Button onClick={handleOpen} style={{ color: "#4e5166", marginRight:"15px" }}>
+                            <Button onClick={handleOpen} style={{ color: "#4e5166", marginRight: "15px" }}>
                                 <EditIcon />
                             </Button>
-                            <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description" >
-                                <Box sx={{ position:"absolute", top:"50%", left:"50%", transform:"translate(-50%, -50%)", width:"75%", height:"300px", background:"white", borderRadius:"15px"}}>
-                                    <Typography id="modal-modal-title" variant="h6" component="h2" sx={{marginLeft:"10px"}}>
+                            <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+                                <Box sx={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: "75%", height: "300px", background: "white", borderRadius: "15px" }}>
+                                    <Typography id="modal-modal-title" variant="h6" component="h2" sx={{ marginLeft: "10px" }}>
                                         Éditez votre post !
                                     </Typography>
                                     <TextField type="text" id="desc" sx={{ display: "flex", height: "50px", width: "90%", margin: "10px" }} placeholder={post.desc} onChange={(e) => setDesc(e.target.value)} />
-                                    <Typography id="modal-modal-title" variant="h6" component="h2" sx={{marginLeft:"10px"}}>
+                                    <Typography id="modal-modal-title" variant="h6" component="h2" sx={{ marginLeft: "10px" }}>
                                         Ajoutez une nouvelle image !
                                         <label htmlFor="input">
-                            <Input accept="image/*" id="input" type="file" name="img" style={{ display: "none" }} />
-                            <Button size="small" style={{ color: "#4e5166", borderRadius: "15px", backgroundColor: "#ffd7d7", height: "50px", marginRight: "10px" }} aria-label="Télécharger une image" component="span" onChange={(e) => setFile(e.target.value)}>
-                                <AddPhotoAlternateIcon />
-                            </Button>
-                        </label>
+                                            <Input accept="image/*" id="input" type="file" name="img" style={{ display: "none" }} />
+                                            <Button size="small" style={{ color: "#4e5166", borderRadius: "15px", backgroundColor: "#ffd7d7", height: "50px", marginLeft: "10px", marginRight:"10px" }} aria-label="Télécharger une image" component="span" onChange={(e) => setFile(e.target.value)}>
+                                                <AddPhotoAlternateIcon />
+                                            </Button>
+                                        </label> 
+                                        ou supprimez là :
+                                        <Button size="small" style={{ color: "#4e5166", borderRadius: "15px", backgroundColor: "#ffd7d7", height: "50px", marginLeft: "10px" }} aria-label="Télécharger une image" component="span" onClick={(e) => setFile("")}>
+                                        <DeleteIcon />
+                                            </Button>
                                     </Typography>
-                                    <Typography id="modal-modal-title" variant="h6" component="h2" sx={{marginLeft:"10px"}}>
-
-                                    Et validez ici !
+                                    <Typography id="modal-modal-title" variant="h6" component="h2" sx={{ marginLeft: "10px" }}>
+                                        Et validez ici !
+                                        <Button onClick={() => updatePost(post._id)} style={{ color: "#4e5166", borderRadius: "15px", backgroundColor: "#ffd7d7", height: "50px", marginLeft: "10px" }}>
+                                            <EditIcon />
+                                        </Button>
                                     </Typography>
-                                    <Button onClick={() => updatePost(post._id)} style={{ color: "#4e5166", marginLeft:"10px" }}>
-                                        <EditIcon />
-                                    </Button>
                                 </Box>
                             </Modal>
                         </div>
