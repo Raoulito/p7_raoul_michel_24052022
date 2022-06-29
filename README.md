@@ -17,7 +17,7 @@ Please note that .env files are provided separately.
 ## How to run ?
 
 > ``` git clone git@github.com:Raoulito/p7_raoul_michel_24052022.git```
-> ```run npm install in both front and back folders```
+> run ```npm install``` in both front and back folders.
 > visit at ```localhost:3000```
 
 ## Used technologies
