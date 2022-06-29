@@ -30,6 +30,8 @@ export default function Post({ post }) {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const apiToken = process.env.REACT_APP_WEB3_STORAGE_API_TOKEN;
+    const client = new Web3Storage({ token: apiToken });
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -42,6 +44,11 @@ export default function Post({ post }) {
     const likeHandler = () => {
         setLike(isLiked ? like - 1 : like + 1);
         setIsLiked(!isLiked);
+        let res = axios.post(`http://localhost:27017/api/posts/like`, {
+            userId: localStorage.getItem("isLogged"),
+            postId: post._id,
+        });
+        console.log(res);
     };
 
     const deletePost = async () => {
@@ -60,8 +67,6 @@ export default function Post({ post }) {
         }
     };
 
-    const apiToken = process.env.REACT_APP_WEB3_STORAGE_API_TOKEN;
-    const client = new Web3Storage({ token: apiToken });
     const updatePost = async () => {
         let fileInput = document.getElementById("input");
         if (fileInput === null || fileInput.files === null || fileInput.files.length === 0) {
@@ -125,14 +130,14 @@ export default function Post({ post }) {
                                         Ajoutez une nouvelle image !
                                         <label htmlFor="input">
                                             <Input accept="image/*" id="input" type="file" name="img" style={{ display: "none" }} />
-                                            <Button size="small" style={{ color: "#4e5166", borderRadius: "15px", backgroundColor: "#ffd7d7", height: "50px", marginLeft: "10px", marginRight:"10px" }} aria-label="Télécharger une image" component="span" onChange={(e) => setFile(e.target.value)}>
+                                            <Button size="small" style={{ color: "#4e5166", borderRadius: "15px", backgroundColor: "#ffd7d7", height: "50px", marginLeft: "10px", marginRight: "10px" }} aria-label="Télécharger une image" component="span" onChange={(e) => setFile(e.target.value)}>
                                                 <AddPhotoAlternateIcon />
                                             </Button>
-                                        </label> 
-                                        ou supprimez là :
+                                        </label>
+                                        <br></br>Ou supprimez là :
                                         <Button size="small" style={{ color: "#4e5166", borderRadius: "15px", backgroundColor: "#ffd7d7", height: "50px", marginLeft: "10px" }} aria-label="Télécharger une image" component="span" onClick={(e) => setFile("")}>
-                                        <DeleteIcon />
-                                            </Button>
+                                            <DeleteIcon />
+                                        </Button>
                                     </Typography>
                                     <Typography id="modal-modal-title" variant="h6" component="h2" sx={{ marginLeft: "10px" }}>
                                         Et validez ici !
@@ -156,7 +161,7 @@ export default function Post({ post }) {
 
                 {post.img && (
                     <Box sx={{ px: "15px" }}>
-                        <CardMedia sx={{ width: "100%", borderRadius: "15px" }} component="img" alt="" height="" src={(URL.srcObject = post.img)} />
+                        <CardMedia sx={{ width: "100%", borderRadius: "15px" }} component="img" alt="" height="350px" src={(URL.srcObject = post.img)} />
                     </Box>
                 )}
                 <Box sx={{ px: "15px", display: "flex", justifyContent: "flex-start", my: "10px" }}>
@@ -189,7 +194,7 @@ export default function Post({ post }) {
 
                 {post.img && (
                     <Box sx={{ px: "15px" }}>
-                        <CardMedia sx={{ width: "100%", borderRadius: "15px" }} component="img" alt="" height="" src={(URL.srcObject = post.img)} />
+                        <CardMedia sx={{ width: "100%", borderRadius: "15px" }} component="img" alt="" height="350px" src={(URL.srcObject = post.img)} />
                     </Box>
                 )}
                 <Box sx={{ px: "15px", display: "flex", justifyContent: "flex-start", my: "10px" }}>

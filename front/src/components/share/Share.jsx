@@ -42,41 +42,39 @@ export default function Share() {
                     userId: localStorage.getItem("isLogged"),
                     desc: desc,
                     img: "",
-            });
-            console.log(res);
-        } catch (err) {
-            console.log(err);
-        } finally {
-            window.location.reload();
-        }
+                });
+                console.log(res);
+            } catch (err) {
+                console.log(err);
+            } finally {
+                window.location.reload();
+            }
         } else {
-
-        const rootCid = await client.put(fileInput.files, {
-            name: "",
-            maxRetries: 3,
-        });
-    
-        console.log(file)
-        const res = await client.get(rootCid);
-        const files = await res.files();
-        const url = URL.createObjectURL(files[0]);
-        setFile(url);
-
-        try {
-            
-            let res = await axios.post("http://localhost:27017/api/posts", {
-                userId: localStorage.getItem("isLogged"),
-                desc: desc,
-                img:"https://" + rootCid + ".ipfs.dweb.link/" + files[0].name,
+            const rootCid = await client.put(fileInput.files, {
+                name: "",
+                maxRetries: 3,
             });
-            console.log(res)
-        } catch (err) {
-            console.log(err);
-        } finally {
-            window.location.reload();
+
+            console.log(file);
+            const res = await client.get(rootCid);
+            const files = await res.files();
+            const url = URL.createObjectURL(files[0]);
+            setFile(url);
+
+            try {
+                let res = await axios.post("http://localhost:27017/api/posts", {
+                    userId: localStorage.getItem("isLogged"),
+                    desc: desc,
+                    img: "https://" + rootCid + ".ipfs.dweb.link/" + files[0].name,
+                });
+                console.log(res);
+            } catch (err) {
+                console.log(err);
+            } finally {
+                window.location.reload();
+            }
         }
-    }
-}
+    };
 
     return (
         <>

@@ -6,7 +6,7 @@ import axios from "axios";
 export default function Feed() {
     const [posts, setPosts] = useState([]);
     useEffect(() => {
-        axios.get("http://localhost:27017/api/posts").then(res => setPosts(res.data.posts));
+        axios.get("http://localhost:27017/api/posts").then((res) => setPosts(res.data.posts));
     }, []);
 
     return (

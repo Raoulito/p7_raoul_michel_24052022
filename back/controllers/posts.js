@@ -1,7 +1,6 @@
 const Post = require("../models/Post");
 const User = require("../models/User");
 
-
 //Create a post
 exports.createPost = async (req, res) => {
     const newPost = new Post(req.body);
@@ -62,9 +61,7 @@ exports.getAllPosts = async (req, res) => {
     } catch (error) {
         res.status(500).json({ error });
     }
-}
-
-
+};
 
 //Get timeline posts
 exports.getPostsById = async (req, res) => {
@@ -92,18 +89,18 @@ exports.getPost = async (req, res) => {
     }
 };
 
-//(dis)like a post
+//(dis)like a post with userId and postId in body
 exports.likePost = async (req, res) => {
     try {
-        const post = await Post.findById(req.params.id);
-        if (!post.likes.includes(req.body.userId)) {
-            await post.updateOne({ $push: { likes: req.body.userId } });
-            res.status(200).json("The post has been liked");
+        const post = await Post.findById(req.body.postId);
+        if (post.likes.includes(req.body.userId)) {
+            post.likes = post.likes.filter((id) => id !== req.body.userId);
         } else {
-            await post.updateOne({ $pull: { likes: req.body.userId } });
-            res.status(200).json("The post has been disliked");
+            post.likes.push(req.body.userId);
         }
-    } catch (err) {
-        res.status(500).json(err);
+        await post.save();
+        res.status(200).json(post);
+    } catch (error) {
+        res.status(500).json({ error });
     }
 };

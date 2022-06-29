@@ -8,6 +8,8 @@ export const Logout = () => {
         navigate("/login");
     };
     return (
-                <Button variant="contained" onClick={logout}>Me déconnecter</Button>    
+        <Button variant="contained" onClick={logout}>
+            Me déconnecter
+        </Button>
     );
 };

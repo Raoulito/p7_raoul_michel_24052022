@@ -8,6 +8,12 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Topbar from "../topbar/Topbar";
+import DynamicFeedIcon from "@mui/icons-material/DynamicFeed";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import ListItemButton from "@mui/material/ListItemButton";
 import { Link } from "react-router-dom";
 import { GroupoManiaRoutes } from "../../router/routes";
 
@@ -17,43 +23,13 @@ function Leftbar(props) {
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
 
-    // const menuLeftUp = [
-    //     {
-    //         name: "Fil d'actualités",
-    //         icon: <DynamicFeedIcon />,
-    //         to: "/",
-    //     },
-    //     {
-    //         name: "Messagerie",
-    //         icon: <MessageIcon />,
-    //         to: "/chat",
-    //     },
-    //     {
-    //         name: "Vidéos",
-    //         icon: <OndemandVideoIcon />,
-    //         to: "/videos",
-    //     },
-    //     {
-    //         name: "Vos groupes",
-    //         icon: <GroupsIcon />,
-    //         to: "/groups",
-    //     },
-    //     {
-    //         name: "Formations",
-    //         icon: <SchoolIcon />,
-    //         to: "/school",
-    //     },
-    //     {
-    //         name: "Comité d'entreprise",
-    //         icon: <BeachAccessIcon />,
-    //         to: "/holidays",
-    //     },
-    //     {
-    //         name: "Foire aux questions",
-    //         icon: <HelpOutlineIcon />,
-    //         to: "/faq",
-    //     },
-    // ];
+    const menuLeftUp = [
+        {
+            name: "Bientôt plus de fonctionnalités",
+            icon: <DynamicFeedIcon />,
+            to: "/",
+        },
+    ];
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
@@ -64,14 +40,14 @@ function Leftbar(props) {
             <Toolbar disableGutters sx={{ backgroundColor: "#ffd7d7" }}>
                 <Box display="flex" sx={{ position: "sticky" }}>
                     <Link to="/">
-                    <img src="http://localhost:27017/images/assets/logos/icon-left-font-monochrome-black.png" width="200px" alt="Logo" />
+                        <img src="http://localhost:27017/images/assets/logos/icon-left-font-monochrome-black.png" width="200px" alt="Logo" />
                     </Link>
                 </Box>
             </Toolbar>
             <Divider />
-            {/* <List sx={{ backgroundColor: "#4e5166", color: "#fff" }}>
+            <List sx={{ backgroundColor: "#4e5166", color: "#fff", textDecoration: "none" }}>
                 {menuLeftUp.map((entry, index) => (
-                    <ListItem key={index} disablePadding>
+                    <ListItem key={index} disablePadding sx={{ textDecoration: "none" }}>
                         <ListItemButton>
                             <ListItemIcon>{entry.icon}</ListItemIcon>
                             <Link to={entry.to} sx={{ textDecoration: "none" }}>
@@ -81,8 +57,7 @@ function Leftbar(props) {
                     </ListItem>
                 ))}
             </List>
-            <Divider /> */}
-
+            <Divider />
         </div>
     );
 
@@ -108,8 +83,9 @@ function Leftbar(props) {
             <Box component="nav" sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }} aria-label="raccourcis">
                 {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
                 <Drawer
+                    disableEnforceFocus={true}
                     container={container}
-                    variant="persistent"
+                    variant="temporary"
                     open={mobileOpen}
                     onClose={handleDrawerToggle}
                     ModalProps={{
@@ -126,6 +102,7 @@ function Leftbar(props) {
                     {drawer}
                 </Drawer>
                 <Drawer
+                    disableEnforceFocus={true}
                     variant="permanent"
                     sx={{
                         display: { xs: "none", sm: "block" },
