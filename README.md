@@ -19,3 +19,11 @@ Please note that .env files are provided separately.
 > ``` git clone git@github.com:Raoulito/p7_raoul_michel_24052022.git```
 > ```run npm install in both front and back folders```
 > visit at ```localhost:3000```
+
+## Used technologies
+
+- MongoDB
+- Express
+- React
+- NodeJS
+- Web3 Storage
