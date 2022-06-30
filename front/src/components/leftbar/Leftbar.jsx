@@ -83,7 +83,6 @@ function Leftbar(props) {
             <Box component="nav" sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }} aria-label="raccourcis">
                 {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
                 <Drawer
-                    disableEnforceFocus={true}
                     container={container}
                     variant="temporary"
                     open={mobileOpen}
@@ -102,7 +101,6 @@ function Leftbar(props) {
                     {drawer}
                 </Drawer>
                 <Drawer
-                    disableEnforceFocus={true}
                     variant="permanent"
                     sx={{
                         display: { xs: "none", sm: "block" },
