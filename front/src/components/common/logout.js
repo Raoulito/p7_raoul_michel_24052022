@@ -5,6 +5,7 @@ export const Logout = () => {
     const navigate = useNavigate();
     const logout = () => {
         localStorage.removeItem("isLogged");
+        localStorage.removeItem("isAdmin");
         navigate("/login");
     };
     return (
@@ -13,3 +14,4 @@ export const Logout = () => {
         </Button>
     );
 };
+
