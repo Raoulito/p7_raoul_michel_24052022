@@ -1,5 +1,13 @@
 # P7 Openclassrooms - Groupomania
 
+## Used technologies
+
+-   MongoDB
+-   Express
+-   React
+-   NodeJS
+-   Web3 Storage
+
 ## How to run the project.
 
 Please note that .env files are provided separately.
@@ -23,10 +31,4 @@ Please note that .env files are provided separately.
 > run `nodemon server` in the back folder.
 > visit at `localhost:3000`
 
-## Used technologies
 
--   MongoDB
--   Express
--   React
--   NodeJS
--   Web3 Storage
